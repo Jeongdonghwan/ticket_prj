@@ -109,7 +109,7 @@ header.scrolled{box-shadow:0 4px 18px rgba(0,0,0,.06)}
 .phone-sec{background:var(--gray-l);border-radius:56px 56px 0 0}
 .phone-wrap{position:relative;width:fit-content;margin:44px auto 0}
 .iphone{width:300px;background:#111;border-radius:48px;padding:11px;box-shadow:0 34px 70px rgba(0,0,0,.22)}
-.toast{position:absolute;background:#fff;border-radius:16px;box-shadow:0 16px 36px rgba(0,0,0,.16);padding:13px 16px;display:flex;gap:11px;align-items:center;text-align:left;z-index:3;width:230px}
+.toast{position:absolute;background:#fff;border-radius:16px;box-shadow:0 16px 36px rgba(0,0,0,.16);padding:13px 16px;display:flex;gap:11px;align-items:center;text-align:left;z-index:3;width:230px;pointer-events:none}
 .toast .t-ic{flex:none;width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center}
 .toast .t-ic svg{width:20px;height:20px}
 .toast .t-tt{font-size:13px;font-weight:800}
@@ -120,7 +120,7 @@ header.scrolled{box-shadow:0 4px 18px rgba(0,0,0,.06)}
 .toast.pay .t-ic{background:#E8F9F0;color:var(--green)}
 .toast.talk{left:-150px;bottom:150px;animation:floaty 5.5s ease-in-out 1s infinite alternate}
 .toast.talk .t-ic{background:#FEE500;color:#191919}
-@media(max-width:760px){.toast.pay{right:-16px;top:76px}.toast.talk{left:-16px;bottom:110px}.toast{width:200px;padding:11px 13px}}
+@media(max-width:760px){.toast.pay{right:-8px;top:-20px}.toast.talk{left:-8px;bottom:-20px}.toast{width:196px;padding:11px 13px}.toast .t-tx{font-size:11.5px}}
 .iphone .scr{background:#fff;border-radius:38px;overflow:hidden;text-align:center;padding-bottom:26px}
 .statusbar{display:flex;align-items:center;justify-content:space-between;padding:12px 22px 6px;font-size:12.5px;font-weight:700}
 .statusbar .island{width:82px;height:24px;background:#111;border-radius:999px}
