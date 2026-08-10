@@ -399,7 +399,7 @@ footer a{text-decoration:underline}
         <svg class="icon" aria-hidden="true"><use href="#i-coin"/></svg>
         <div><span class="badge-line">시세 조회 완료</span></div>
         <div class="big">최대 <span class="c">{{ "{:,}".format(CULTURE_100K_PRICE) }}원</span></div>
-        <div><span class="badge-y">문화상품권 10만원권 기준</span></div>
+        <div><span class="badge-y">알뜰티켓 초고속 비상금서비스</span></div>
         <p class="txt">지금 바로 카카오톡으로 상담하시면<br><b>7분 이내 입금</b>까지 도와드려요</p>
         <button class="p-btn k" onclick="openChannel()"><svg aria-hidden="true"><use href="#i-chat-f"/></svg>카카오톡으로 판매하기</button>
         <a class="p-btn o" href="tel:{{ PHONE_NUMBER }}"><svg aria-hidden="true"><use href="#i-phone"/></svg>전화로 문의하기</a>
@@ -418,7 +418,7 @@ footer a{text-decoration:underline}
     <div class="live-card">
       <div class="bar"><svg aria-hidden="true"><use href="#i-refresh"/></svg><span id="liveTime">00:00</span> 기준 이용자</div>
       <table>
-        <thead><tr><th>성함</th><th>매입 금액</th><th>진행 상태</th></tr></thead>
+        <thead><tr><th>성함</th><th>비상금 입금금액</th><th>진행 상태</th></tr></thead>
         {# 초기 피드 SSR — 입금완료 실데이터(마스킹), 5건 미만은 JS가 더미로 패딩 #}
         <tbody id="liveBody">{% for r in initial_feed %}<tr><td>{{ r.name }}</td><td class="amt">{{ "{:,}".format(r.amount) }}원</td><td><span class="badge">입금완료</span></td></tr>{% endfor %}</tbody>
       </table>
