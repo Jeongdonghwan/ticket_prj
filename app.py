@@ -1,5 +1,6 @@
 """알뜰티켓 — 랜딩 + 상담 어드민 (Flask + MariaDB)"""
 import os
+import re
 import time
 from collections import defaultdict, deque
 from datetime import datetime
@@ -115,16 +116,17 @@ def api_inquiry():
     phone = (data.get("phone") or "").strip()[:20]
     if not name or not phone:
         return jsonify({"ok": False, "error": "이름과 연락처를 입력해주세요."}), 400
-    category = (data.get("category") or "").strip()[:40] or None
-    amount_range = (data.get("amount") or "").strip()[:20] or None
+    # 신청 금액 → amount_final로 바로 저장. 입금완료 처리 시 이 금액이 그대로 랜딩 피드에 노출됨
+    digits = re.sub(r"\D", "", (data.get("amount") or ""))[:9]
+    amount_final = int(digits) if digits else None
     memo = (data.get("memo") or "").strip()[:2000] or None
     db.execute(
-        "INSERT INTO inquiries (source, name, phone, category, amount_range, memo) "
-        "VALUES ('form', %s, %s, %s, %s, %s)",
-        (name, phone, category, amount_range, memo),
+        "INSERT INTO inquiries (source, name, phone, memo, amount_final) "
+        "VALUES ('form', %s, %s, %s, %s)",
+        (name, phone, memo, amount_final),
     )
     notify_new_inquiry({"source_label": "하단폼", "name": name, "phone": phone,
-                        "category": category, "amount_range": amount_range, "memo": memo})
+                        "amount_final": amount_final, "memo": memo})
     return jsonify({"ok": True}), 201
 
 

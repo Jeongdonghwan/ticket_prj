@@ -20,7 +20,9 @@
       "Bash(curl -s http://127.0.0.1:5057/ -o /tmp/p.html -w \"GET / -> %{http_code}\\\\n\")",
       "Read(//c/Users/jdhwa/.claude/skills/**)",
       "Bash(git -C \"c:/side_Prj/ticket_prj\" status)",
-      "Read(//c/Users/jdhwa/.claude/skills/deploy/**)"
+      "Read(//c/Users/jdhwa/.claude/skills/deploy/**)",
+      "Bash(git add *)",
+      "Bash(git commit -q -m '신청 금액 필드 추가 — 입금완료 시 신청 금액 그대로 사용 *)"
     ],
     "additionalDirectories": [
       "\\tmp"

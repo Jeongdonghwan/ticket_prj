@@ -68,16 +68,16 @@ select.st.hold{color:var(--red)}
     <table>
       <thead><tr>
         <th>접수시각</th><th class="hide-m">유입</th><th>이름</th><th>연락처</th>
-        <th>상품권 / 금액대</th><th class="hide-m">문의 내용</th><th>상태</th>
+        <th>신청 금액</th><th class="hide-m">문의 내용</th><th>상태</th>
       </tr></thead>
       <tbody>
         {% for r in rows %}
         <tr>
           <td>{{ r.time_label }}</td><td class="hide-m"><span class="src">{{ r.source_label }}</span></td>
           <td>{{ r.name }}</td><td>{{ r.phone }}</td>
-          <td>{{ r.category or '-' }}<span class="memo">{{ r.amount_range or '-' }}</span></td>
+          <td>{% if r.amount_final %}{{ "{:,}".format(r.amount_final) }}원{% else %}-{% endif %}</td>
           <td class="hide-m"><span class="memo">{{ r.memo or '-' }}</span></td>
-          <td><select class="st {{ st_class[r.status] }}" data-id="{{ r.id }}" data-cur="{{ r.status }}">
+          <td><select class="st {{ st_class[r.status] }}" data-id="{{ r.id }}" data-cur="{{ r.status }}" data-amt="{{ r.amount_final or '' }}">
             {% for key, label in status_labels.items() %}<option value="{{ key }}"{% if r.status==key %} selected{% endif %}>{{ label }}</option>{% endfor %}
           </select></td>
         </tr>
@@ -104,8 +104,9 @@ document.querySelectorAll('select.st').forEach(s=>{
   s.addEventListener('change',async ()=>{
     const prev=s.dataset.cur, status=s.value;
     let body={status};
-    if(status==='done'){
-      const v=prompt('매입금액(원)을 입력하세요.\n입력 시 랜딩 실시간 진행현황에 노출됩니다. (건너뛰려면 취소)');
+    /* 신청 금액이 있으면 그대로 사용(입력창 생략), 없는 건(채널톡 등)만 prompt */
+    if(status==='done'&&!s.dataset.amt){
+      const v=prompt('신청 금액이 없는 건입니다. 매입금액(원)을 입력하세요.\n입력 시 랜딩 실시간 진행현황에 노출됩니다. (건너뛰려면 취소)');
       if(v!==null&&v.trim()!==''){
         const n=parseInt(v.replace(/[^0-9]/g,''),10);
         if(!isNaN(n))body.amount_final=n;
@@ -120,6 +121,7 @@ document.querySelectorAll('select.st').forEach(s=>{
       const j=await res.json().catch(()=>({}));
       if(!res.ok||!j.ok)throw new Error(j.error||'저장에 실패했습니다.');
       s.dataset.cur=status;
+      if(body.amount_final)s.dataset.amt=body.amount_final;
       s.className='st '+stClass[status];
     }catch(err){
       alert(err.message||'저장에 실패했습니다.');

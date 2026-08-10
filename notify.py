@@ -26,12 +26,13 @@ def notify(text):
 
 
 def notify_new_inquiry(inq):
+    amt = inq.get("amount_final")
     notify(
         "[알뜰티켓] 새 문의 접수\n"
         f"유입: {inq.get('source_label', inq.get('source', ''))}\n"
         f"이름: {inq.get('name', '')}\n"
         f"연락처: {inq.get('phone', '')}\n"
-        f"상품권: {inq.get('category') or '-'} / {inq.get('amount_range') or '-'}\n"
+        f"신청 금액: {f'{amt:,}원' if amt else '-'}\n"
         f"내용: {(inq.get('memo') or '-')[:200]}"
     )
 
