@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>알뜰티켓 어드민 — 상담 리스트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--yellow:#FFC933;--deep:#F2A900;--ink:#191919;--soft:#767676;--bg:#F6F4EE;--line:#E6E1D4;--green:#12B76A;--blue:#3B6FE0;--red:#E5484D}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Pretendard Variable",Pretendard,sans-serif;background:var(--bg);color:var(--ink);font-size:14.5px;letter-spacing:-0.01em}
+header{background:var(--ink);color:#fff;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:800;font-size:16px;display:flex;gap:8px;align-items:center}
+.logo i{width:24px;height:17px;background:var(--yellow);border-radius:4px}
+header a{color:#B8B4AA;font-size:13px;font-weight:700;text-decoration:none}
+main{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:20px;font-weight:800}
+.sub{color:var(--soft);font-size:13px;margin:4px 0 20px}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 15px;font-size:13px;font-weight:700;cursor:pointer;color:var(--soft);font-family:inherit}
+.chip.on{background:var(--ink);color:var(--yellow);border-color:var(--ink)}
+.toolbar input{margin-left:auto;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-family:inherit;font-size:13.5px;width:200px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:12.5px;color:var(--soft);text-align:left;padding:12px;border-bottom:1px solid var(--line);font-weight:700;background:#FCFAF3}
+td{padding:13px 12px;border-bottom:1px solid #F1EEE4;font-weight:600;vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:#FCFAF3}
+td .memo{display:block;font-size:12.5px;color:var(--soft);font-weight:500;margin-top:3px;max-width:260px}
+.src{display:inline-block;font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:999px;background:#F1EEE4;color:var(--soft)}
+select.st{border:1.5px solid var(--line);border-radius:8px;padding:6px 10px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;background:#fff}
+select.st.new{color:var(--deep);border-color:var(--yellow)}
+select.st.ing{color:var(--blue)}
+select.st.done{color:var(--green)}
+select.st.hold{color:var(--red)}
+.pager{display:flex;gap:6px;justify-content:center;padding:16px}
+.pager button{width:32px;height:32px;border:1px solid var(--line);background:#fff;border-radius:8px;font-family:inherit;font-weight:700;cursor:pointer;color:var(--soft)}
+.pager button.on{background:var(--ink);color:var(--yellow);border-color:var(--ink)}
+@media(max-width:760px){
+  .hide-m{display:none}
+  td .memo{max-width:150px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><i></i>알뜰티켓 어드민</div>
+  <a href="#">로그아웃</a>
+</header>
+<main>
+  <h1>상담 리스트</h1>
+  <p class="sub">신규 접수는 상단에 표시됩니다 · 상태 변경 시 즉시 저장</p>
+
+  <div class="toolbar">
+    <button class="chip on">전체</button>
+    <button class="chip">신규</button>
+    <button class="chip">상담중</button>
+    <button class="chip">입금완료</button>
+    <button class="chip">보류</button>
+    <input placeholder="이름/연락처 검색">
+  </div>
+
+  <div class="panel">
+    <table>
+      <thead><tr>
+        <th>접수시각</th><th class="hide-m">유입</th><th>이름</th><th>연락처</th>
+        <th>상품권 / 금액대</th><th class="hide-m">문의 내용</th><th>상태</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>08-05 14:22</td><td class="hide-m"><span class="src">채널톡</span></td>
+          <td>김지영</td><td>010-1234-5678</td>
+          <td>문화상품권<span class="memo">10~30만원</span></td>
+          <td class="hide-m"><span class="memo">10만원권 2매 보유, 오늘 판매 희망</span></td>
+          <td><select class="st new"><option selected>신규</option><option>상담중</option><option>입금완료</option><option>보류</option></select></td>
+        </tr>
+        <tr>
+          <td>08-05 14:05</td><td class="hide-m"><span class="src">하단폼</span></td>
+          <td>이현준</td><td>010-2345-6789</td>
+          <td>모바일 기프티콘<span class="memo">5만원 이하</span></td>
+          <td class="hide-m"><span class="memo">스타벅스 카드 잔액 확인 요청</span></td>
+          <td><select class="st ing"><option>신규</option><option selected>상담중</option><option>입금완료</option><option>보류</option></select></td>
+        </tr>
+        <tr>
+          <td>08-05 13:48</td><td class="hide-m"><span class="src">채널톡</span></td>
+          <td>박민서</td><td>010-3456-7890</td>
+          <td>백화점상품권<span class="memo">30만원 이상</span></td>
+          <td class="hide-m"><span class="memo">신세계 30만원권</span></td>
+          <td><select class="st done"><option>신규</option><option>상담중</option><option selected>입금완료</option><option>보류</option></select></td>
+        </tr>
+        <tr>
+          <td>08-05 13:12</td><td class="hide-m"><span class="src">전화</span></td>
+          <td>최성민</td><td>010-4567-8901</td>
+          <td>해피머니<span class="memo">5~10만원</span></td>
+          <td class="hide-m"><span class="memo">-</span></td>
+          <td><select class="st done"><option>신규</option><option>상담중</option><option selected>입금완료</option><option>보류</option></select></td>
+        </tr>
+        <tr>
+          <td>08-05 12:40</td><td class="hide-m"><span class="src">하단폼</span></td>
+          <td>정수아</td><td>010-5678-9012</td>
+          <td>게임문화상품권<span class="memo">5~10만원</span></td>
+          <td class="hide-m"><span class="memo">핀번호 보유</span></td>
+          <td><select class="st hold"><option>신규</option><option>상담중</option><option>입금완료</option><option selected>보류</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pager">
+      <button class="on">1</button><button>2</button><button>3</button>
+    </div>
+  </div>
+</main>
+
+<script>
+/* 상태 변경 시 색상 클래스 갱신 + 저장 (실서비스: PATCH /api/admin/inquiries/:id) */
+document.querySelectorAll('select.st').forEach(s=>{
+  s.addEventListener('change',()=>{
+    const map={'신규':'new','상담중':'ing','입금완료':'done','보류':'hold'};
+    s.className='st '+map[s.value];
+  });
+});
+</script>
+</body>
+</html>

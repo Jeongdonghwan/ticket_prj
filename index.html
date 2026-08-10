@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>알뜰티켓 — 카톡 한번으로 끝! 내 비상금 한도 바로찾기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --yellow:#FFC933; --deep:#F2A900; --pale:#FFF6DC;
+  --ink:#191919; --gray:#767676; --gray-l:#F7F7F9; --line:#EDEDED;
+  --green:#12B76A; --navy:#1F2437;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,sans-serif;color:var(--ink);background:#fff;line-height:1.65;letter-spacing:-0.01em}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:0}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+section{padding:90px 0;text-align:center}
+.sec-brand{font-size:15px;font-weight:800;color:var(--deep);margin-bottom:10px}
+.sec-title{font-size:clamp(22px,4vw,30px);font-weight:800;letter-spacing:-0.03em;line-height:1.4}
+.sec-title .c{color:var(--deep)}
+.sec-desc{margin:16px auto 0;color:var(--gray);font-size:15.5px;max-width:480px}
+.sec-desc b{color:var(--ink);font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;font-size:15px;font-weight:800;padding:14px 30px;border-radius:999px;margin-top:28px;transition:transform .15s,box-shadow .15s}
+.pill:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.pill.y{background:var(--yellow);color:var(--ink)}
+.pill svg,.btn-big svg{width:19px;height:19px}
+:focus-visible{outline:3px solid var(--deep);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* motion */
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@keyframes floaty{to{translate:0 -10px}}
+
+/* ── 실물풍 상품권 카드 ── */
+.gc{border-radius:16px;color:#fff;text-align:left;position:relative;overflow:hidden;padding:16px 18px;box-shadow:0 14px 30px rgba(0,0,0,.18)}
+.gc::before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.14);top:-90px;right:-60px}
+.gc::after{content:"";position:absolute;left:18px;right:18px;bottom:14px;height:16px;opacity:.85;
+  background:repeating-linear-gradient(90deg,#fff 0 2px,transparent 2px 5px,#fff 5px 6px,transparent 6px 10px,#fff 10px 13px,transparent 13px 16px)}
+.gc .gc-nm{font-size:12.5px;font-weight:700;opacity:.9;letter-spacing:.02em}
+.gc .gc-sub{font-size:10.5px;opacity:.6;margin-top:1px}
+.gc .gc-rt{position:absolute;left:18px;bottom:38px;font-size:20px;font-weight:900;letter-spacing:-0.02em;font-variant-numeric:tabular-nums}
+.gc .gc-rt small{display:block;font-size:10.5px;font-weight:700;opacity:.75;letter-spacing:.04em}
+.g-green{background:linear-gradient(135deg,#00B274,#007A50)}
+.g-blue{background:linear-gradient(135deg,#4A7DF0,#2648A8)}
+.g-orange{background:linear-gradient(135deg,#FF9A4D,#F2612E)}
+.g-violet{background:linear-gradient(135deg,#7B57EC,#4A2FB8)}
+.g-pink{background:linear-gradient(135deg,#FF6D96,#E0356B)}
+.g-dark{background:linear-gradient(135deg,#3A4157,#171B28)}
+
+/* 히어로 카드 스택 */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;left:50%;top:52%;width:560px;height:560px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,201,51,.35),transparent 65%);pointer-events:none}
+.stack{position:relative;width:min(340px,80vw);height:230px;margin:48px auto 0;animation:rise .8s ease .35s both}
+.stack .gc{position:absolute;width:230px;height:145px;left:50%;top:34px}
+.stack .gc:nth-child(1){transform:translateX(-50%) rotate(-12deg) translateX(-66px);animation:floaty 4.5s ease-in-out 1.2s infinite alternate}
+.stack .gc:nth-child(2){transform:translateX(-50%) rotate(9deg) translateX(66px);animation:floaty 5.5s ease-in-out 1.6s infinite alternate}
+.stack .gc:nth-child(3){transform:translateX(-50%) translateY(-14px);z-index:2;animation:floaty 5s ease-in-out 1.4s infinite alternate;box-shadow:0 24px 50px rgba(0,0,0,.28)}
+/* AI 모델 이미지 사용 시: .stack 대신 <img class="hero-model" src="..."> */
+.hero-model{display:block;width:min(420px,86vw);margin:40px auto -70px;position:relative;z-index:1;animation:rise .8s ease .3s both;filter:drop-shadow(0 24px 40px rgba(0,0,0,.18))}
+
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);transition:box-shadow .2s}
+header.scrolled{box-shadow:0 4px 18px rgba(0,0,0,.06)}
+.nav{max-width:1040px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:900;letter-spacing:-0.02em}
+.logo .tk{width:28px;height:20px;background:var(--yellow);border-radius:5px;position:relative;display:inline-block}
+.logo .tk::before,.logo .tk::after{content:"";position:absolute;width:7px;height:7px;background:#fff;border-radius:50%;top:6.5px}
+.logo .tk::before{left:-3.5px}.logo .tk::after{right:-3.5px}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:14px;font-weight:600;color:#555}
+.nav ul a:hover{color:var(--ink)}
+@media(max-width:800px){.nav ul{display:none}}
+
+/* hero */
+.hero{padding:84px 20px 70px;text-align:center;background:linear-gradient(180deg,var(--pale) 0%,#fff 90%)}
+.hero h1{font-size:clamp(28px,5.6vw,44px);font-weight:900;letter-spacing:-0.04em;line-height:1.35;animation:rise .7s ease .05s both}
+.hero h1 .c{color:var(--deep)}
+.hero .note{margin-top:18px;font-size:13px;color:#999;animation:rise .7s ease .2s both}
+.hero .note b{color:#666}
+
+/* stat callout */
+.stat{padding:80px 20px}
+.stat h2{font-size:clamp(24px,4.6vw,34px);font-weight:900;letter-spacing:-0.03em;line-height:1.45}
+.stat h2 .c{color:var(--deep)}
+.stat h2 .cash{display:inline-flex;vertical-align:-4px;width:34px;height:26px;background:var(--yellow);border-radius:6px;position:relative;margin:0 4px}
+.stat h2 .cash::after{content:"";position:absolute;inset:5px 8px;border:2px solid #fff;border-radius:50%}
+.stat .em{margin-top:26px;font-size:15px}
+.stat .em b{font-weight:800}
+.stat .em p{color:var(--gray);margin-top:4px}
+.stat .chev{margin:26px auto 0;width:26px;color:#C9C9C9;animation:bounceDown 1.6s ease-in-out infinite}
+.btn-big{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:30px;background:var(--yellow);color:var(--ink);font-size:17px;font-weight:900;padding:19px 0;width:min(420px,88vw);border-radius:14px;box-shadow:0 10px 26px rgba(242,169,0,.35);transition:transform .15s}
+.btn-big:hover{transform:translateY(-2px)}
+
+/* phone mockup */
+.phone-sec{background:var(--gray-l);border-radius:56px 56px 0 0}
+.phone-wrap{position:relative;width:fit-content;margin:44px auto 0}
+.iphone{width:300px;background:#111;border-radius:48px;padding:11px;box-shadow:0 34px 70px rgba(0,0,0,.22)}
+.toast{position:absolute;background:#fff;border-radius:16px;box-shadow:0 16px 36px rgba(0,0,0,.16);padding:13px 16px;display:flex;gap:11px;align-items:center;text-align:left;z-index:3;width:230px}
+.toast .t-ic{flex:none;width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center}
+.toast .t-ic svg{width:20px;height:20px}
+.toast .t-tt{font-size:13px;font-weight:800}
+.toast .t-tt small{float:right;font-size:10.5px;color:#B5B5B5;font-weight:600}
+.toast .t-tx{font-size:12px;color:var(--gray);margin-top:1px}
+.toast .t-tx b{color:var(--deep)}
+.toast.pay{right:-150px;top:110px;animation:floaty 4.5s ease-in-out infinite alternate}
+.toast.pay .t-ic{background:#E8F9F0;color:var(--green)}
+.toast.talk{left:-150px;bottom:150px;animation:floaty 5.5s ease-in-out 1s infinite alternate}
+.toast.talk .t-ic{background:#FEE500;color:#191919}
+@media(max-width:760px){.toast.pay{right:-16px;top:76px}.toast.talk{left:-16px;bottom:110px}.toast{width:200px;padding:11px 13px}}
+.iphone .scr{background:#fff;border-radius:38px;overflow:hidden;text-align:center;padding-bottom:26px}
+.statusbar{display:flex;align-items:center;justify-content:space-between;padding:12px 22px 6px;font-size:12.5px;font-weight:700}
+.statusbar .island{width:82px;height:24px;background:#111;border-radius:999px}
+.statusbar .r{display:flex;gap:5px;align-items:center;font-size:10.5px;font-weight:800;color:#333}
+.scr .icon{width:44px;height:44px;margin:22px auto 0;color:var(--deep)}
+.scr .badge-line{display:inline-block;margin-top:12px;border:1.5px solid var(--ink);border-radius:999px;font-size:12px;font-weight:800;padding:5px 14px}
+.scr .big{margin-top:12px;font-size:29px;font-weight:900;letter-spacing:-0.03em}
+.scr .big .c{color:var(--deep)}
+.scr .badge-y{display:inline-block;margin-top:10px;background:var(--pale);color:var(--deep);border-radius:999px;font-size:12.5px;font-weight:800;padding:6px 14px}
+.scr .txt{margin-top:14px;font-size:13.5px;color:var(--gray);line-height:1.6;padding:0 22px}
+.scr .txt b{color:var(--ink)}
+.p-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 20px 0;padding:14px;border-radius:999px;font-size:14px;font-weight:800}
+.p-btn.k{background:var(--yellow)}
+.p-btn.o{background:#fff;border:1.5px solid var(--line);margin-top:10px}
+.p-btn svg{width:17px;height:17px}
+.scr .tiny{margin-top:14px;font-size:10.5px;color:#B5B5B5}
+
+/* rates */
+.rates .grid{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rates .gc{aspect-ratio:1.586;transition:transform .18s,box-shadow .18s}
+.rates .gc:hover{transform:translateY(-6px) rotate(-1.2deg);box-shadow:0 22px 44px rgba(0,0,0,.24)}
+@media(max-width:720px){.rates .grid{grid-template-columns:repeat(2,1fr)}.gc .gc-rt{font-size:17px;bottom:34px}}
+
+/* live table */
+.live-card{margin-top:38px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.08);border:1px solid var(--line)}
+.live-card .bar{background:var(--navy);color:#fff;font-size:13.5px;font-weight:700;padding:13px;display:flex;justify-content:center;align-items:center;gap:8px}
+.live-card .bar svg{width:15px;height:15px;animation:spin 3.5s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.live-card table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.live-card th{font-size:13px;color:var(--gray);font-weight:700;padding:13px 8px;border-bottom:1px solid var(--line)}
+.live-card td{padding:15px 8px;font-size:14px;font-weight:700;border-bottom:1px solid #F3F3F3}
+.live-card td.amt{color:var(--deep);font-weight:900}
+.badge{display:inline-block;background:var(--navy);color:#fff;font-size:11.5px;font-weight:800;padding:5px 13px;border-radius:999px}
+.badge.ing{background:var(--pale);color:var(--deep)}
+tr.new-row{animation:rowIn .6s ease}
+tr.new-row td{animation:rowFlash 2s ease}
+@keyframes rowIn{from{opacity:0;transform:translateY(-10px)}}
+@keyframes rowFlash{0%{background:var(--pale)}100%{background:transparent}}
+
+/* reviews */
+.reviews{background:var(--navy);color:#fff;border-radius:56px 56px 0 0;margin-top:20px}
+.reviews .sec-title{color:#fff}
+.rv-slider{position:relative;max-width:640px;margin:40px auto 0}
+.rv-card{background:#fff;color:var(--ink);border-radius:18px;padding:34px 36px;text-align:left;min-height:250px;display:flex;flex-direction:column}
+.rv-head{display:flex;gap:12px;align-items:center}
+.avatar{width:46px;height:46px;border-radius:50%;background:var(--pale);display:flex;align-items:center;justify-content:center;color:var(--deep)}
+.avatar svg{width:24px;height:24px}
+.rv-name{font-weight:800;font-size:15px}
+.stars{color:#FFB400;font-size:13px;letter-spacing:2px;font-weight:900}
+.stars small{color:var(--gray);letter-spacing:0;margin-left:4px;font-weight:700}
+.rv-body{margin-top:16px;font-size:14.5px;color:#444;flex:1}
+.rv-date{margin-top:16px;font-size:12.5px;color:#AAA}
+.rv-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;display:flex;align-items:center;justify-content:center}
+.rv-nav:hover{background:rgba(255,255,255,.28)}
+.rv-nav.prev{left:-56px}.rv-nav.next{right:-56px}
+.rv-nav svg{width:18px;height:18px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:20px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3)}
+.dots i.on{background:var(--yellow)}
+@media(max-width:780px){.rv-nav.prev{left:8px}.rv-nav.next{right:8px}.rv-nav{background:rgba(0,0,0,.25)}}
+
+/* trust */
+.trust .grid{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left}
+.t-card{background:var(--gray-l);border-radius:16px;padding:26px;display:flex;gap:22px;align-items:center}
+.doc{flex:none;width:92px;height:120px;background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 14px rgba(0,0,0,.08);position:relative;padding:12px 10px}
+.doc i{display:block;height:5px;background:#E8E8E8;border-radius:3px;margin-bottom:7px}
+.doc i:nth-child(1){width:60%;background:#D5D5D5}
+.doc i:nth-child(4){width:70%}
+.doc::after{content:"인";position:absolute;right:9px;bottom:9px;width:26px;height:26px;border:2px solid #E5484D;color:#E5484D;border-radius:50%;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;transform:rotate(-12deg);opacity:.85}
+.doc.lock{display:flex;align-items:center;justify-content:center;padding:0}
+.doc.lock::after{display:none}
+.doc.lock svg{width:40px;height:40px;color:var(--green)}
+.t-card h3{font-size:17px;font-weight:800}
+.t-card p{margin-top:8px;font-size:13.5px;color:var(--gray)}
+@media(max-width:720px){.trust .grid{grid-template-columns:1fr}}
+
+/* faq */
+.faq-list{max-width:640px;margin:36px auto 0;text-align:left}
+details{background:var(--gray-l);border-radius:12px;margin-top:12px;padding:20px 24px}
+summary{font-weight:800;cursor:pointer;font-size:15px}
+details p{margin-top:12px;color:var(--gray);font-size:14px}
+
+/* inquiry */
+.inq{background:var(--gray-l)}
+.inq form{margin:36px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:560px;text-align:left}
+.inq label{display:grid;gap:7px;font-size:13px;font-weight:800;color:#555}
+.inq input,.inq select,.inq textarea{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;font-family:inherit;transition:border-color .15s}
+.inq input:focus,.inq select:focus,.inq textarea:focus{border-color:var(--yellow);outline:none}
+.inq textarea{resize:vertical;min-height:88px}
+.inq .full{grid-column:1/-1}
+.inq .agree{grid-column:1/-1;display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--gray);font-weight:600}
+.inq button{grid-column:1/-1;margin-top:4px}
+@media(max-width:600px){.inq form{grid-template-columns:1fr}}
+
+/* footer */
+footer{padding:44px 0 130px;font-size:12.5px;color:#999;text-align:center}
+footer .f-logo{font-weight:900;color:var(--ink);font-size:15px;margin-bottom:10px}
+
+/* floating */
+.float{position:fixed;right:18px;bottom:22px;display:grid;gap:10px;z-index:60}
+.fab{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.22);transition:transform .15s;position:relative}
+.fab:hover{transform:scale(1.07)}
+.fab svg{width:23px;height:23px}
+.fab.ch{background:var(--navy);color:#fff}
+.fab.kko{background:#FEE500;color:#191919}
+.fab.tel{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.fab.top{background:var(--yellow);color:var(--ink)}
+.fab .tip{position:absolute;right:64px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.fab:hover .tip{opacity:1}
+</style>
+</head>
+<body>
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H9.5L5 20v-4.2A2.5 2.5 0 0 1 4 13.5v-7z"/>
+      <circle cx="9" cy="10.2" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="10.2" r="0.9" fill="currentColor" stroke="none"/><circle cx="15" cy="10.2" r="0.9" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-chat-f" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3c5.2 0 9.5 3.4 9.5 7.7S17.2 18.4 12 18.4c-.9 0-1.8-.1-2.6-.3L5 21l1-3.5c-1.9-1.4-3.5-3.7-3.5-6.8C2.5 6.4 6.8 3 12 3z"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 4h3.5l1.5 4-2 1.5a12.5 12.5 0 0 0 6.5 6.5L16 14l4 1.5V19a2 2 0 0 1-2 2C9.8 21 3 14.2 3 6a2 2 0 0 1 2-2z"/>
+    </symbol>
+    <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></symbol>
+    <symbol id="i-down2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5 12 12l7-6.5M5 12l7 6.5 7-6.5"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5.5 16 12l-6.5 6.5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4h-4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.2" r="1.2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5V9a2.6 2.6 0 0 0 0 6v1.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16.5V15a2.6 2.6 0 0 0 0-6z"/><path d="M14.5 6v12" stroke-dasharray="2 3"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.2C10 4.8 7.5 4.2 4 4.2v13.6c3.5 0 6 .6 8 2 2-1.4 4.5-2 8-2V4.2c-3.5 0-6 .6-8 2z"/><path d="M12 6.2v13.6"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 13.5c.9 1.4 2.1 2.1 3.5 2.1s2.6-.7 3.5-2.1"/><circle cx="9.3" cy="9.8" r="0.9" fill="currentColor" stroke="none"/><circle cx="14.7" cy="9.8" r="0.9" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 11v8.5h15V11"/><path d="M3.5 10 5 5h14l1.5 5a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M10 19.5v-4.5h4v4.5"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9.5" width="16" height="10" rx="1.5"/><path d="M12 9.5v10M4 13.5h16"/><path d="M12 9.5c-1.6 0-4-.6-4-2.6C8 5.2 9.1 4.5 10 4.5c1.7 0 2 2.5 2 5 0-2.5.3-5 2-5 .9 0 2 .7 2 2.4 0 2-2.4 2.6-4 2.6z"/></symbol>
+    <symbol id="i-game" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 7.5h9a5 5 0 0 1 5 5v1.2a3.8 3.8 0 0 1-6.8 2.3L13.5 15h-3l-1.2 1a3.8 3.8 0 0 1-6.8-2.3v-1.2a5 5 0 0 1 5-5z"/><path d="M7 11.5h3.4M8.7 9.8v3.4"/><circle cx="15.6" cy="12.4" r="0.9" fill="currentColor" stroke="none"/><circle cx="17.8" cy="10.4" r="0.9" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 9l1.6 6L12 9l2.4 6L16 9M7.2 11.6h9.6"/></symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="nav">
+    <a href="#" class="logo"><span class="tk"></span>알뜰티켓</a>
+    <ul>
+      <li><a href="#intro">서비스 소개</a></li>
+      <li><a href="#rates">매입 시세</a></li>
+      <li><a href="#live">진행현황</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#inquiry">문의하기</a></li>
+    </ul>
+    <a class="pill" style="margin:0;padding:9px 18px;font-size:13.5px" href="#inquiry">빠른 상담</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>카톡 한번으로 끝!<br>안 쓰는 <span class="c">상품권 팔기!</span></h1>
+  <p class="note">* 지금 <b>30초 만에 시세 조회</b> 가능한 알뜰티켓 매입 서비스입니다.<br>가입이나 앱 설치 없이 이용 가능합니다.</p>
+  <div class="stack" aria-hidden="true">
+    <div class="gc g-green"><div class="gc-nm">문화상품권</div><div class="gc-sub">CULTURELAND</div><div class="gc-rt">96.5%<small>오늘 매입률</small></div></div>
+    <div class="gc g-violet"><div class="gc-nm">백화점상품권</div><div class="gc-sub">DEPARTMENT GIFT CARD</div><div class="gc-rt">95.0%<small>오늘 매입률</small></div></div>
+    <div class="gc g-dark"><div class="gc-nm" style="color:var(--yellow)">알뜰티켓</div><div class="gc-sub">ALDDEUL TICKET</div><div class="gc-rt" style="color:var(--yellow)">96,500원<small style="color:#fff">문화상품권 10만원권 매입가</small></div></div>
+  </div>
+</div>
+
+<section class="stat">
+  <div class="wrap">
+    <h2>평균 <span class="c" id="avgAmt">96,500원</span><br>상품권을 <span class="cash" aria-hidden="true"></span> 현금으로 받았어요</h2>
+    <div class="em">
+      <b>서류/방문 없이</b>
+      <p>30초 시세 조회가 가능합니다!</p>
+    </div>
+    <svg class="chev" aria-hidden="true"><use href="#i-down2"/></svg>
+    <br>
+    <button class="btn-big" onclick="openChannel()">내 상품권 시세 조회</button>
+  </div>
+</section>
+
+<section id="intro" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-brand">알뜰티켓</div>
+    <h2 class="sec-title">간편 상품권 매입 서비스 알뜰티켓</h2>
+    <p class="sec-desc">알뜰티켓은 복잡한 절차 없이,<br><b>카톡 한 통</b>으로 안 쓰는 상품권을 팔 수 있는<br>신개념 간편 상품권 매입 서비스입니다.</p>
+    <a class="pill" href="#rates">매입 시세 보기</a>
+  </div>
+</section>
+
+<section class="phone-sec">
+  <div class="wrap">
+    <div class="sec-brand">시세 조회</div>
+    <h2 class="sec-title">조회부터 입금까지, <span class="c">평균 7분</span></h2>
+    <div class="phone-wrap rv">
+      <div class="toast pay" aria-hidden="true">
+        <div class="t-ic"><svg><use href="#i-coin"/></svg></div>
+        <div style="flex:1"><div class="t-tt">입금 완료<small>방금 전</small></div><div class="t-tx">알뜰티켓 <b>96,500원</b> 입금</div></div>
+      </div>
+      <div class="toast talk" aria-hidden="true">
+        <div class="t-ic"><svg><use href="#i-chat-f"/></svg></div>
+        <div style="flex:1"><div class="t-tt">알뜰티켓<small>오후 12:39</small></div><div class="t-tx">비상금 조회 완료! 바로 도와드릴게요</div></div>
+      </div>
+      <div class="iphone">
+      <div class="scr">
+        <div class="statusbar">
+          <span id="phTime">12:46</span>
+          <span class="island"></span>
+          <span class="r">LTE ▮▮▮</span>
+        </div>
+        <svg class="icon" aria-hidden="true"><use href="#i-coin"/></svg>
+        <div><span class="badge-line">시세 조회 완료</span></div>
+        <div class="big">최대 <span class="c">96,500원</span></div>
+        <div><span class="badge-y">알뜰페이만의 초고속 서비스</span></div>
+        <p class="txt">지금 바로 카카오톡으로 상담하시면<br><b>7분 이내 입금</b>까지 도와드려요</p>
+        <button class="p-btn k" onclick="openChannel()"><svg aria-hidden="true"><use href="#i-chat-f"/></svg>카카오톡으로 문의하기</button>
+        <a class="p-btn o" href="tel:0000-0000"><svg aria-hidden="true"><use href="#i-phone"/></svg>전화로 문의하기</a>
+        <p class="tiny">* 비상금한도는 개인에 따라 달라질 수 있습니다.</p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rates" id="rates">
+  <div class="wrap">
+    <div class="sec-brand">오늘의 시세</div>
+    <h2 class="sec-title">매입 시세를 <span class="c">투명하게</span> 공개합니다</h2>
+    <p class="sec-desc">조회한 시세 <b>그대로 입금</b>해 드립니다.</p>
+    <div class="grid">
+      <div class="gc g-green"><div class="gc-nm">문화상품권</div><div class="gc-sub">CULTURELAND</div><div class="gc-rt">96.5%<small>매입률</small></div></div>
+      <div class="gc g-blue"><div class="gc-nm">도서문화상품권</div><div class="gc-sub">BOOK &amp; CULTURE</div><div class="gc-rt">95.0%<small>매입률</small></div></div>
+      <div class="gc g-orange"><div class="gc-nm">해피머니</div><div class="gc-sub">HAPPY MONEY</div><div class="gc-rt">94.5%<small>매입률</small></div></div>
+      <div class="gc g-violet"><div class="gc-nm">백화점상품권</div><div class="gc-sub">DEPARTMENT GIFT CARD</div><div class="gc-rt">95.0%<small>매입률</small></div></div>
+      <div class="gc g-pink"><div class="gc-nm">모바일 기프티콘</div><div class="gc-sub">MOBILE GIFTICON</div><div class="gc-rt">시세 상담<small>브랜드별</small></div></div>
+      <div class="gc g-dark"><div class="gc-nm">게임문화상품권</div><div class="gc-sub">GAME &amp; CULTURE</div><div class="gc-rt">93.0%<small>매입률</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="live" style="padding-top:40px">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="c">알뜰티켓</span> 실시간 진행현황</h2>
+    <p class="sec-desc">알뜰티켓을 이용한 분들의<br>실시간 진행현황을 확인해보세요!</p>
+    <div class="live-card">
+      <div class="bar"><svg aria-hidden="true"><use href="#i-refresh"/></svg><span id="liveTime">00:00</span> 기준 이용자</div>
+      <table>
+        <thead><tr><th>성함</th><th>상품 종류</th><th>매입 금액</th><th>진행 상태</th></tr></thead>
+        <tbody id="liveBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <h2 class="sec-title">알뜰티켓 이용 후기</h2>
+    <div class="rv-slider">
+      <div class="rv-card" id="rvCard">
+        <div class="rv-head">
+          <div class="avatar"><svg><use href="#i-user"/></svg></div>
+          <div>
+            <div class="rv-name" id="rvName"></div>
+            <div class="stars">★★★★★<small>5.0</small></div>
+          </div>
+        </div>
+        <p class="rv-body" id="rvBody"></p>
+        <p class="rv-date" id="rvDate"></p>
+      </div>
+      <button class="rv-nav prev" onclick="slide(-1)" aria-label="이전 후기"><svg><use href="#i-left"/></svg></button>
+      <button class="rv-nav next" onclick="slide(1)" aria-label="다음 후기"><svg><use href="#i-right"/></svg></button>
+      <div class="dots" id="rvDots"></div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <h2 class="sec-title">알뜰티켓, 믿고 써도 될까요?<br><b>그래서 준비했습니다</b></h2>
+    <p class="sec-desc">고객님들이 <b>믿고 이용하는 이유</b>, 따로 있어요!</p>
+    <div class="grid">
+      <div class="t-card"><div class="doc"><i></i><i></i><i></i><i></i><i></i></div><div><h3>정식 사업자 등록 업체</h3><p>정식으로 사업자 등록을 마친 합법적인 업체로, 신뢰할 수 있는 매입 서비스를 제공합니다.</p></div></div>
+      <div class="t-card"><div class="doc"><i></i><i></i><i></i><i></i><i></i></div><div><h3>통신판매업 신고 등록</h3><p>전자상거래법에 따라 통신판매업 신고를 완료한 업체로, 소비자 보호와 투명한 거래를 보장합니다.</p></div></div>
+      <div class="t-card"><div class="doc lock"><svg><use href="#i-lock"/></svg></div><div><h3>HTTPS 보안 인증</h3><p>본 사이트는 HTTPS 보안 인증을 완료하여 모든 상담 및 입력 정보는 암호화 처리됩니다.</p></div></div>
+      <div class="t-card"><div class="doc lock"><svg><use href="#i-user"/></svg></div><div><h3>본인 명의 계좌 입금 원칙</h3><p>안전거래를 위해 판매자 본인 명의 계좌로만 입금하며, 개인정보는 상담 목적 외 사용하지 않습니다.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:40px">
+  <div class="wrap">
+    <h2 class="sec-title">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <details><summary>매입 시세는 언제 바뀌나요?</summary><p>시장 유통 시세에 따라 매일 오전 업데이트되며, 상담 시점의 시세가 그대로 적용됩니다.</p></details>
+      <details><summary>타인 명의 계좌로 입금받을 수 있나요?</summary><p>안전거래 원칙에 따라 판매자 본인 명의 계좌로만 입금해 드립니다.</p></details>
+      <details><summary>사용한 흔적이 있는 상품권도 매입하나요?</summary><p>잔액이 확인되는 경우 잔액 기준으로 매입 가능합니다. 상담 시 알려주세요.</p></details>
+      <details><summary>영업시간이 어떻게 되나요?</summary><p>연중무휴 09:00~24:00 상담 가능하며, 시간 외 접수 건은 다음 영업 시작 시 순차 처리됩니다.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="inq" id="inquiry">
+  <div class="wrap">
+    <div class="sec-brand">문의하기</div>
+    <h2 class="sec-title">궁금한 점을 남겨주세요</h2>
+    <p class="sec-desc">영업시간 내 <b>10분 이내</b> 연락드립니다.</p>
+    <form id="inqForm">
+      <label>이름<input name="name" required placeholder="홍길동"></label>
+      <label>연락처<input name="phone" required placeholder="010-0000-0000"></label>
+      <label>상품권 종류
+        <select name="category">
+          <option>문화상품권</option><option>도서문화상품권</option><option>해피머니</option>
+          <option>백화점상품권</option><option>모바일 기프티콘</option><option>게임문화상품권</option><option>기타</option>
+        </select>
+      </label>
+      <label>보유 금액대
+        <select name="amount">
+          <option>5만원 이하</option><option>5~10만원</option><option>10~30만원</option><option>30만원 이상</option>
+        </select>
+      </label>
+      <label class="full">문의 내용<textarea name="memo" placeholder="문의하실 내용을 적어주세요."></textarea></label>
+      <label class="agree"><input type="checkbox" required style="width:auto"> 개인정보 수집·이용에 동의합니다. (상담 목적, 완료 후 파기)</label>
+      <button class="pill y" style="justify-content:center" type="submit">문의 접수하기</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-logo">알뜰티켓</div>
+    <p>상호: 알뜰티켓 | 대표: OOO | 사업자등록번호: 000-00-00000<br>
+    주소: OO시 OO구 OO로 00 | 통신판매업신고: 제0000-OOOO-0000호<br>
+    고객센터: 0000-0000 (09:00~24:00, 연중무휴) | 이메일: help@alddeulticket.kr</p>
+    <p style="margin-top:10px">© 2026 알뜰티켓. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="float">
+  <button class="fab ch" onclick="openChannel()" aria-label="채널톡 상담"><span class="tip">채널톡 상담</span><svg aria-hidden="true"><use href="#i-chat"/></svg></button>
+  <a class="fab kko" href="#" aria-label="카카오톡 문의"><span class="tip">카카오톡 문의</span><svg aria-hidden="true"><use href="#i-chat-f"/></svg></a>
+  <a class="fab tel" href="tel:0000-0000" aria-label="전화 문의"><span class="tip">전화 문의</span><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+  <button class="fab top" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
+</div>
+
+<script>
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function openChannel(){ alert('채널톡 연결 (배포 시 ChannelIO.showMessenger 로 교체)'); }
+function pad(n){return String(n).padStart(2,'0')}
+
+/* 헤더 섀도 */
+addEventListener('scroll',()=>document.querySelector('header').classList.toggle('scrolled',scrollY>10),{passive:true});
+
+/* 폰 목업 시계 */
+const now=new Date();
+document.getElementById('phTime').textContent=pad(now.getHours())+':'+pad(now.getMinutes());
+
+/* 실시간 진행현황 — 실서비스: GET /api/live-feed */
+const surnames=['이','김','최','서','한','박','정','강','조','윤'];
+const kinds=['문화상품권','백화점상품권','해피머니','모바일 기프티콘','도서문화상품권','게임문화상품권'];
+const amounts=[48250,96500,193000,285000,57000,142500,380000,95000,190000,66500,430000];
+function feedRow(fresh){
+  const done=!fresh||Math.random()<.4;
+  return `<tr${fresh?' class="new-row"':''}><td>${surnames[Math.floor(Math.random()*surnames.length)]}**님</td>
+  <td>${kinds[Math.floor(Math.random()*kinds.length)]}</td>
+  <td class="amt">${amounts[Math.floor(Math.random()*amounts.length)].toLocaleString()}원</td>
+  <td><span class="badge ${done?'':'ing'}">${done?'입금완료':'진행중'}</span></td></tr>`;
+}
+function setLiveTime(){const d=new Date();document.getElementById('liveTime').textContent=pad(d.getHours())+':'+pad(d.getMinutes())}
+setLiveTime();
+document.getElementById('liveBody').innerHTML=Array.from({length:5},()=>feedRow(false)).join('');
+setInterval(()=>{
+  if(RM||document.hidden)return;
+  const tb=document.getElementById('liveBody');
+  tb.insertAdjacentHTML('afterbegin',feedRow(true));
+  if(tb.rows.length>5)tb.deleteRow(-1);
+  setLiveTime();
+},8000);
+
+/* 스크롤 리빌 */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{threshold:.15,rootMargin:'0px 0px -40px'});
+document.querySelectorAll('.stat h2,.stat .em,.stat .btn-big,.sec-brand,.sec-title,.sec-desc,.pill,.rates .gc,.live-card,.rv-slider,.t-card,details,.inq form,.phone-wrap').forEach(el=>{
+  el.classList.add('rv');
+  const sibs=[...el.parentElement.children];
+  el.style.transitionDelay=Math.min(sibs.indexOf(el),5)*0.08+'s';
+  io.observe(el);
+});
+
+/* 숫자 카운트업 (평균 매입가) */
+function animNum(el){
+  const raw=el.textContent.trim();
+  const m=raw.match(/^([\d,]+)(.*)$/); if(!m||RM)return;
+  const target=parseInt(m[1].replace(/,/g,'')), suf=m[2];
+  const t0=performance.now(), dur=1300;
+  (function f(t){
+    const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*e).toLocaleString()+suf;
+    if(p<1)requestAnimationFrame(f);
+  })(t0);
+}
+const io2=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){animNum(e.target);io2.unobserve(e.target)}
+}),{threshold:.6});
+io2.observe(document.getElementById('avgAmt'));
+
+/* 후기 슬라이더 */
+const reviews=[
+  {name:'이OO 고객님',body:'친구 추천으로 처음 이용해봤는데 정말 만족스러워요! 복잡한 절차 없이 카톡 한 통으로 끝나니까 너무 편했어요. 상담원분도 정말 친절하시고 설명도 차근차근 해주셔서 안심이 됐습니다. 주변 사람들한테도 추천할게요.',date:'2026년 7월 28일'},
+  {name:'박OO 고객님',body:'선물 받고 안 쓰던 백화점상품권 30만원어치를 팔았는데, 시세 조회했던 금액 그대로 10분도 안 돼서 입금됐어요. 다른 데는 깎으려고 하던데 여기는 조회가 곧 매입가라 믿음이 갑니다.',date:'2026년 7월 21일'},
+  {name:'정OO 고객님',body:'기프티콘 유효기간 지나기 전에 정리하려고 이용했어요. 브랜드별로 시세를 하나하나 알려주셔서 좋았고, 본인 계좌로만 입금한다는 것도 오히려 안심됐습니다. 다음에 또 이용할게요.',date:'2026년 7월 12일'}
+];
+let idx=0;
+const dots=document.getElementById('rvDots');
+dots.innerHTML=reviews.map((_,i)=>`<i${i===0?' class="on"':''}></i>`).join('');
+function renderReview(){
+  const r=reviews[idx], card=document.getElementById('rvCard');
+  card.style.opacity=0; card.style.transform='translateY(8px)';
+  setTimeout(()=>{
+    document.getElementById('rvName').textContent=r.name;
+    document.getElementById('rvBody').textContent=r.body;
+    document.getElementById('rvDate').textContent=r.date;
+    [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===idx));
+    card.style.transition='opacity .35s,transform .35s';
+    card.style.opacity=1; card.style.transform='none';
+  },RM?0:180);
+}
+function slide(d){idx=(idx+d+reviews.length)%reviews.length;renderReview();resetAuto()}
+let auto=setInterval(()=>slide(1),6000);
+function resetAuto(){clearInterval(auto);auto=setInterval(()=>slide(1),6000)}
+renderReview();
+
+/* 문의 폼 — 실서비스: POST /api/inquiry */
+document.getElementById('inqForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  alert('문의가 접수되었습니다. 곧 연락드리겠습니다.\n(배포 시 POST /api/inquiry 연동)');
+  e.target.reset();
+});
+</script>
+</body>
+</html>

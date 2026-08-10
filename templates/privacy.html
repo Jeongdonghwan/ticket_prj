@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>알뜰티켓 — 개인정보처리방침</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--yellow:#FFC933;--deep:#F2A900;--ink:#191919;--gray:#767676;--line:#EDEDED}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,sans-serif;color:var(--ink);background:#fff;line-height:1.7;letter-spacing:-0.01em}
+.wrap{max-width:720px;margin:0 auto;padding:60px 20px 100px}
+h1{font-size:24px;font-weight:900;letter-spacing:-0.03em}
+h2{font-size:16px;font-weight:800;margin:32px 0 8px}
+p,li{font-size:14.5px;color:#444}
+ul{padding-left:20px;margin-top:6px}
+.date{margin-top:10px;font-size:13px;color:var(--gray)}
+a.back{display:inline-block;margin-bottom:28px;font-size:13.5px;font-weight:700;color:var(--deep);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="{{ url_for('index') }}">&larr; 알뜰티켓 홈으로</a>
+  <h1>개인정보처리방침</h1>
+  <p class="date">시행일: 2026년 8월 1일</p>
+
+  <h2>1. 수집하는 개인정보 항목</h2>
+  <p>알뜰티켓(이하 "회사")은 상품권 매입 상담을 위해 아래 정보를 수집합니다.</p>
+  <ul>
+    <li>필수: 이름, 연락처(휴대전화번호)</li>
+    <li>선택: 상품권 종류, 보유 금액대, 문의 내용</li>
+  </ul>
+
+  <h2>2. 수집 및 이용 목적</h2>
+  <ul>
+    <li>상품권 매입 상담 및 안내 연락</li>
+    <li>매입 진행 상태 관리 및 입금 처리</li>
+  </ul>
+
+  <h2>3. 보유 및 이용 기간, 파기</h2>
+  <p>수집된 개인정보는 <b>상담 목적 달성(상담 완료) 후 지체 없이 파기</b>합니다.
+  전자적 파일 형태의 정보는 복구할 수 없는 방법으로 삭제하며, 관계 법령에 따라 보존이 필요한 경우 해당 기간 동안만 보관합니다.</p>
+
+  <h2>4. 제3자 제공 및 처리 위탁</h2>
+  <p>회사는 이용자의 개인정보를 제3자에게 제공하지 않으며, 상담 목적 외로 사용하지 않습니다.</p>
+
+  <h2>5. 이용자의 권리</h2>
+  <p>이용자는 언제든지 본인 개인정보의 열람·정정·삭제를 요청할 수 있습니다. 고객센터({{ PHONE_NUMBER }}) 또는 이메일(help@alddeulticket.kr)로 연락 주시면 지체 없이 처리합니다.</p>
+
+  <h2>6. 개인정보 보호책임자</h2>
+  {# TODO(대표 확인): 오픈 전 실제 책임자 정보로 교체 #}
+  <p>성명: OOO | 연락처: {{ PHONE_NUMBER }} | 이메일: help@alddeulticket.kr</p>
+</div>
+</body>
+</html>

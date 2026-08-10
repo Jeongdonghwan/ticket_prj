@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(rm -f /tmp/inq.json)",
+      "Bash(curl -s -o /dev/null -w \"GET / -> %{http_code}\\\\n\" http://127.0.0.1:5057/)",
+      "Bash(mkdir -p \"c:/side_Prj/ticket_prj/static/img/avatars\")",
+      "Bash(touch \"c:/side_Prj/ticket_prj/static/img/avatars/.gitkeep\")",
+      "Bash(rm -f _js_check.js)",
+      "Bash(awk '{print $NF}')",
+      "PowerShell(Stop-Process -Id 35272 -Force -Confirm:$false)",
+      "Bash(python -m flask run --port 5057 --debug)",
+      "Bash(curl -s http://127.0.0.1:5057/ -o /tmp/page.html -w \"GET / -> %{http_code}\\\\n\")",
+      "Read(//tmp/**)",
+      "Bash(cp model.png static/img/hero-model.png)",
+      "Bash(curl -s -o /dev/null -w \"hero-model.png -> %{http_code} \\(%{size_download} bytes\\)\\\\n\" http://127.0.0.1:5057/static/img/hero-model.png)",
+      "Bash(curl -s http://127.0.0.1:5057/)",
+      "Bash(pip install *)",
+      "Bash(python -c \"import rembg; print\\('rembg ok'\\)\")",
+      "Bash(curl -s http://127.0.0.1:5057/ -o /tmp/p.html -w \"GET / -> %{http_code}\\\\n\")",
+      "Read(//c/Users/jdhwa/.claude/skills/**)",
+      "Bash(git -C \"c:/side_Prj/ticket_prj\" status)",
+      "Read(//c/Users/jdhwa/.claude/skills/deploy/**)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
+    ]
+  }
+}
