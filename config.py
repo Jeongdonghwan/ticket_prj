@@ -31,3 +31,9 @@ KAKAO_CHANNEL_URL = "#"
 
 # 어드민 상담 리스트 페이지당 행 수
 ADMIN_PAGE_SIZE = 20
+
+# 사이트 대표 URL (canonical/OG/sitemap 기준) — 알뜰티켓.com 의 퓨니코드
+SITE_URL = "https://xn--ig2bo1yush92d.com"
+
+# 검색 노출용 사이트 설명 (meta description / OG)
+SITE_DESCRIPTION = "카톡 한 번으로 끝나는 간편 매입 서비스, 알뜰티켓. 30초 시세 조회, 평균 7분 입금, 본인 명의 계좌 안전거래. 연중무휴 09:00~24:00 상담."

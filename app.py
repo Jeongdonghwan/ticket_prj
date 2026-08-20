@@ -72,6 +72,8 @@ def inject_constants():
         "PHONE_NUMBER": config.PHONE_NUMBER,
         "KAKAO_CHANNEL_URL": config.KAKAO_CHANNEL_URL,
         "CHANNELTALK_PLUGIN_KEY": os.environ.get("CHANNELTALK_PLUGIN_KEY", ""),
+        "SITE_URL": config.SITE_URL,
+        "SITE_DESCRIPTION": config.SITE_DESCRIPTION,
     }
 
 
@@ -101,7 +103,22 @@ def privacy():
 
 @app.get("/robots.txt")
 def robots():
-    return Response("User-agent: *\nDisallow: /admin\n", mimetype="text/plain")
+    return Response(
+        f"User-agent: *\nDisallow: /admin\n\nSitemap: {config.SITE_URL}/sitemap.xml\n",
+        mimetype="text/plain",
+    )
+
+
+@app.get("/sitemap.xml")
+def sitemap():
+    pages = [("/", "1.0"), ("/privacy", "0.3")]
+    items = "".join(
+        f"<url><loc>{config.SITE_URL}{path}</loc><priority>{pr}</priority></url>"
+        for path, pr in pages
+    )
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>'
+           f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{items}</urlset>')
+    return Response(xml, mimetype="application/xml")
 
 
 @app.post("/api/inquiry")

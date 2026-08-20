@@ -4,6 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>알뜰티켓 — 카톡 한번으로 끝! 내 비상금 한도 바로찾기</title>
+
+{# ── SEO ─────────────────────────────────────────── #}
+<meta name="description" content="{{ SITE_DESCRIPTION }}">
+<link rel="canonical" href="{{ SITE_URL }}/">
+<meta name="naver-site-verification" content="5c7e09ef7f856238f2455149bce3855221c30931" />
+<meta name="google-site-verification" content="VCDVd409ev4Ju8pOvhZLU6IvHTI70eAsR59lLyyktJ8" />
+{# 카톡/문자/SNS 공유 미리보기 (Open Graph) #}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="알뜰티켓">
+<meta property="og:title" content="알뜰티켓 — 카톡 한번으로 끝! 내 비상금 한도 바로찾기">
+<meta property="og:description" content="{{ SITE_DESCRIPTION }}">
+<meta property="og:url" content="{{ SITE_URL }}/">
+<meta property="og:image" content="{{ SITE_URL }}/static/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+{# FAQ 리치 결과용 구조화 데이터 — 아래 FAQ 섹션 내용과 반드시 동기화할 것 #}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"오늘 신청하고 오늘 입금 받을수 있나요?","acceptedAnswer":{"@type":"Answer","text":"비상금 신청후 평균 7분이내에 본인명의계좌로 비상금을 받아보실수 있습니다."}},
+{"@type":"Question","name":"타인 명의 계좌로 입금받을 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"안전거래 원칙에 따라 판매자 본인 명의 계좌로만 입금해 드립니다."}},
+{"@type":"Question","name":"신용카드도 되나요?","acceptedAnswer":{"@type":"Answer","text":"잔액이 확인되는 경우 잔액 기준으로 매입 가능합니다. 상담 시 알려주세요."}},
+{"@type":"Question","name":"영업시간이 어떻게 되나요?","acceptedAnswer":{"@type":"Answer","text":"연중무휴 09:00~24:00 상담 가능하며, 시간 외 접수 건은 다음 영업 시작 시 순차 처리됩니다."}}
+]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"알뜰티켓","url":"{{ SITE_URL }}/","logo":"{{ SITE_URL }}/static/img/apple-touch-icon.png"}
+</script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 {% if CHANNELTALK_PLUGIN_KEY %}
 {# 채널톡(ChannelIO) 부트 — .env의 CHANNELTALK_PLUGIN_KEY 설정 시에만 삽입됨 #}
