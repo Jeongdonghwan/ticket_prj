@@ -265,7 +265,7 @@ footer a{text-decoration:underline}
 .fab svg{width:23px;height:23px}
 .fab.ch{background:var(--navy);color:#fff}
 .fab.kko{background:#FEE500;color:#191919}
-.fab.tel{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.fab.tel{background:var(--navy);color:#fff}
 .fab.top{background:var(--yellow);color:var(--ink)}
 .fab .tip{position:absolute;right:64px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
 .fab:hover .tip{opacity:1}
@@ -529,10 +529,12 @@ footer a{text-decoration:underline}
 </footer>
 
 <div class="float">
+  {% if CHANNELTALK_PLUGIN_KEY %}{# 채널톡 키 등록 전까지 자동 숨김 — .env CHANNELTALK_PLUGIN_KEY 입력 시 다시 표시됨 #}
   <button class="fab ch" onclick="openChannel()" aria-label="채널톡 상담"><span class="tip">채널톡 상담</span><svg aria-hidden="true"><use href="#i-chat"/></svg></button>
+  {% endif %}
+  <a class="fab tel" href="tel:{{ PHONE_NUMBER }}" aria-label="전화 문의"><span class="tip">전화 문의</span><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
   {# TODO(대표 확인): 카카오톡 채널 URL 확보 시 config.py KAKAO_CHANNEL_URL 교체 — CLAUDE.md 8절 #}
   <a class="fab kko" href="{{ KAKAO_CHANNEL_URL }}" aria-label="카카오톡 문의"><span class="tip">카카오톡 문의</span><svg aria-hidden="true"><use href="#i-chat-f"/></svg></a>
-  <a class="fab tel" href="tel:{{ PHONE_NUMBER }}" aria-label="전화 문의"><span class="tip">전화 문의</span><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
   <button class="fab top" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 </div>
 
@@ -540,8 +542,8 @@ footer a{text-decoration:underline}
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function openChannel(){
   if(window.ChannelIO){ChannelIO('showMessenger');return;}
-  /* TODO: .env CHANNELTALK_PLUGIN_KEY 설정 시 위 ChannelIO 경로가 활성화됨 */
-  alert('상담 채널 준비 중입니다. 하단 문의 폼을 이용해주세요.');
+  /* 채널톡 미연동 시 문의 폼으로 스크롤 — .env CHANNELTALK_PLUGIN_KEY 설정 시 메신저가 열림 */
+  document.getElementById('inquiry').scrollIntoView({behavior:RM?'auto':'smooth'});
 }
 function pad(n){return String(n).padStart(2,'0')}
 
