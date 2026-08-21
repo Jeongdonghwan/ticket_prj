@@ -532,7 +532,7 @@ footer a{text-decoration:underline}
   {% if CHANNELTALK_PLUGIN_KEY %}{# 채널톡 키 등록 전까지 자동 숨김 — .env CHANNELTALK_PLUGIN_KEY 입력 시 다시 표시됨 #}
   <button class="fab ch" onclick="openChannel()" aria-label="채널톡 상담"><span class="tip">채널톡 상담</span><svg aria-hidden="true"><use href="#i-chat"/></svg></button>
   {% endif %}
-  <a class="fab tel" href="tel:{{ PHONE_NUMBER }}" aria-label="전화 문의"><span class="tip">전화 문의</span><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+  <a class="fab tel" href="tel:{{ PHONE_NUMBER }}" aria-label="전화 문의"><span class="tip">전화 문의</span><svg aria-hidden="true"><use href="#i-chat"/></svg></a>
   {# TODO(대표 확인): 카카오톡 채널 URL 확보 시 config.py KAKAO_CHANNEL_URL 교체 — CLAUDE.md 8절 #}
   <a class="fab kko" href="{{ KAKAO_CHANNEL_URL }}" aria-label="카카오톡 문의"><span class="tip">카카오톡 문의</span><svg aria-hidden="true"><use href="#i-chat-f"/></svg></a>
   <button class="fab top" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
