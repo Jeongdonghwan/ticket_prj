@@ -386,7 +386,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#inquiry">문의하기</a></li>
     </ul>
-    <a class="pill" style="margin:0;padding:9px 18px;font-size:13.5px" href="#inquiry">빠른 상담</a>
+    <a class="pill" style="margin:0;padding:9px 18px;font-size:13.5px" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener">빠른 상담</a>
   </div>
 </header>
 
@@ -416,7 +416,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sec-brand">알뜰티켓</div>
     <h2 class="sec-title">간편 비상금 서비스</h2>
     <p class="sec-desc">알뜰티켓은 복잡한 절차 없이,<br><b>카톡 한 통</b>비상금을 마련할수 있는<br>신개념 간편 비상금 서비스입니다.</p>
-    <a class="pill" href="#inquiry">바로 신청하기</a>
+    <a class="pill" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener">바로 신청하기</a>
   </div>
 </section>
 
@@ -446,7 +446,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div><span class="badge-y">알뜰티켓 초고속 비상금서비스</span></div>
         <p class="txt">지금 바로 카카오톡으로 상담하시면<br><b>7분 이내 입금</b>까지 도와드려요</p>
         <button class="p-btn k" onclick="openChannel()"><svg aria-hidden="true"><use href="#i-chat-f"/></svg>카카오톡으로 판매하기</button>
-        <a class="p-btn o" href="tel:{{ PHONE_NUMBER }}"><svg aria-hidden="true"><use href="#i-phone"/></svg>전화로 문의하기</a>
+        <a class="p-btn o" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-phone"/></svg>전화로 문의하기</a>
         <p class="tiny">* 실제 매입가는 상담 시점 시세에 따라 달라질 수 있습니다.</p>
       </div>
       </div>
@@ -540,9 +540,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   {% if CHANNELTALK_PLUGIN_KEY %}{# 채널톡 키 등록 전까지 자동 숨김 — .env CHANNELTALK_PLUGIN_KEY 입력 시 다시 표시됨 #}
   <button class="fab ch" onclick="openChannel()" aria-label="채널톡 상담"><span class="tip">채널톡 상담</span><svg aria-hidden="true"><use href="#i-chat"/></svg></button>
   {% endif %}
-  <a class="fab tel" href="https://alleell.channel.io/home" target="_blank" rel="noopener" aria-label="채널톡 상담"><span class="tip">채널톡 상담</span><svg aria-hidden="true"><use href="#i-chat"/></svg></a>
+  <a class="fab tel" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener" aria-label="채널톡 상담"><span class="tip">채널톡 상담</span><svg aria-hidden="true"><use href="#i-chat"/></svg></a>
   {# TODO(대표 확인): 카카오톡 채널 URL 확보 시 config.py KAKAO_CHANNEL_URL 교체 — CLAUDE.md 8절 #}
-  <a class="fab kko" href="{{ KAKAO_CHANNEL_URL }}" aria-label="카카오톡 문의"><span class="tip">카카오톡 문의</span><svg aria-hidden="true"><use href="#i-chat-f"/></svg></a>
+  <a class="fab kko" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener" aria-label="카카오톡 문의"><span class="tip">카카오톡 문의</span><svg aria-hidden="true"><use href="#i-chat-f"/></svg></a>
   <button class="fab top" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 </div>
 
@@ -550,8 +550,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function openChannel(){
   if(window.ChannelIO){ChannelIO('showMessenger');return;}
-  /* 채널톡 미연동 시 문의 폼으로 스크롤 — .env CHANNELTALK_PLUGIN_KEY 설정 시 메신저가 열림 */
-  document.getElementById('inquiry').scrollIntoView({behavior:RM?'auto':'smooth'});
+  /* 채널톡 임베드 미설정 시 채널톡 상담 페이지를 새 탭으로 — .env CHANNELTALK_PLUGIN_KEY 설정 시 사이트 내 메신저가 열림 */
+  window.open('{{ CHANNEL_TALK_URL }}','_blank','noopener');
 }
 function pad(n){return String(n).padStart(2,'0')}
 

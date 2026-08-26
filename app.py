@@ -73,6 +73,7 @@ def inject_constants():
         "KAKAO_CHANNEL_URL": config.KAKAO_CHANNEL_URL,
         "CHANNELTALK_PLUGIN_KEY": os.environ.get("CHANNELTALK_PLUGIN_KEY", ""),
         "SITE_URL": config.SITE_URL,
+        "CHANNEL_TALK_URL": config.CHANNEL_TALK_URL,
         "SITE_DESCRIPTION": config.SITE_DESCRIPTION,
     }
 

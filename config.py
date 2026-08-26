@@ -29,6 +29,9 @@ PHONE_NUMBER = "0000-0000"
 # TODO(대표 확인): 실제 카카오톡 채널 URL로 교체 (예: https://pf.kakao.com/_xxxxxx) — CLAUDE.md 8절
 KAKAO_CHANNEL_URL = "#"
 
+# 채널톡 상담 페이지 URL — 모든 상담/신청 CTA가 여기로 연결됨
+CHANNEL_TALK_URL = "https://alleell.channel.io/home"
+
 # 어드민 상담 리스트 페이지당 행 수
 ADMIN_PAGE_SIZE = 20
 
