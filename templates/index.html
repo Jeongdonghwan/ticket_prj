@@ -247,18 +247,6 @@ details{background:var(--gray-l);border-radius:12px;margin-top:12px;padding:20px
 summary{font-weight:800;cursor:pointer;font-size:15px}
 details p{margin-top:12px;color:var(--gray);font-size:14px}
 
-/* inquiry */
-.inq{background:var(--gray-l)}
-.inq form{margin:36px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:560px;text-align:left}
-.inq label{display:grid;gap:7px;font-size:13px;font-weight:800;color:#555}
-.inq input,.inq select,.inq textarea{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;font-family:inherit;transition:border-color .15s}
-.inq input:focus,.inq select:focus,.inq textarea:focus{border-color:var(--yellow);outline:none}
-.inq textarea{resize:vertical;min-height:88px}
-.inq .full{grid-column:1/-1}
-.inq .agree{grid-column:1/-1;display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--gray);font-weight:600}
-.inq button{grid-column:1/-1;margin-top:4px}
-.hp-field{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden}
-@media(max-width:600px){.inq form{grid-template-columns:1fr}}
 
 /* footer */
 footer{padding:44px 0 130px;font-size:12.5px;color:#999;text-align:center}
@@ -384,7 +372,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><a href="#intro">서비스 소개</a></li>
       <li><a href="#live">진행현황</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="#inquiry">문의하기</a></li>
+      <li><a href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener">문의하기</a></li>
     </ul>
     <a class="pill" style="margin:0;padding:9px 18px;font-size:13.5px" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener">빠른 상담</a>
   </div>
@@ -509,23 +497,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="inq" id="inquiry">
-  <div class="wrap">
-    <div class="sec-brand">문의하기</div>
-    <h2 class="sec-title">궁금한 점을 남겨주세요</h2>
-    <p class="sec-desc">영업시간 내 <b>10분 이내</b> 연락드립니다.</p>
-    <form id="inqForm">
-      <label>이름<input name="name" required placeholder="홍길동"></label>
-      <label>연락처<input name="phone" required placeholder="010-0000-0000"></label>
-      <label class="full">신청 금액 (원)<input name="amount" required inputmode="numeric" placeholder="예: 100,000"></label>
-      <label class="full">문의 내용<textarea name="memo" placeholder="문의하실 내용을 적어주세요."></textarea></label>
-      {# honeypot — 봇 스팸 차단용 숨김 필드 (사람에겐 보이지 않음) #}
-      <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <label class="agree"><input type="checkbox" required style="width:auto"> 개인정보 수집·이용에 동의합니다. (상담 목적, 완료 후 파기)</label>
-      <button class="pill y" style="justify-content:center" type="submit">문의 접수하기</button>
-    </form>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">
@@ -615,7 +586,7 @@ setInterval(liveTick,8000);
 const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
 }),{threshold:.15,rootMargin:'0px 0px -40px'});
-document.querySelectorAll('.stat h2,.stat .em,.stat .btn-big,.sec-brand,.sec-title,.sec-desc,.pill,.rates .gc,.live-card,.rv2,.t-card,details,.inq form,.phone-wrap').forEach(el=>{
+document.querySelectorAll('.stat h2,.stat .em,.stat .btn-big,.sec-brand,.sec-title,.sec-desc,.pill,.rates .gc,.live-card,.rv2,.t-card,details,.phone-wrap').forEach(el=>{
   el.classList.add('rv');
   const sibs=[...el.parentElement.children];
   el.style.transitionDelay=Math.min(sibs.indexOf(el),5)*0.08+'s';
@@ -678,31 +649,6 @@ addEventListener('resize',()=>rvUpdate(false));
 addEventListener('load',()=>rvUpdate(false));
 rvUpdate(false);
 
-/* 문의 폼 — POST /api/inquiry */
-document.getElementById('inqForm').addEventListener('submit',async e=>{
-  e.preventDefault();
-  const f=e.target, btn=f.querySelector('button[type=submit]');
-  const data=Object.fromEntries(new FormData(f).entries());
-  btn.disabled=true;
-  try{
-    const res=await fetch('/api/inquiry',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data)
-    });
-    const j=await res.json().catch(()=>({}));
-    if(res.ok&&j.ok){
-      alert('문의가 접수되었습니다. 곧 연락드리겠습니다.');
-      f.reset();
-    }else{
-      alert(j.error||'접수에 실패했습니다. 잠시 후 다시 시도해주세요.');
-    }
-  }catch(err){
-    alert('접수에 실패했습니다. 잠시 후 다시 시도해주세요.');
-  }finally{
-    btn.disabled=false;
-  }
-});
 </script>
 </body>
 </html>

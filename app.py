@@ -1,6 +1,5 @@
 """알뜰티켓 — 랜딩 + 상담 어드민 (Flask + MariaDB)"""
 import os
-import re
 import time
 from collections import defaultdict, deque
 from datetime import datetime
@@ -120,32 +119,6 @@ def sitemap():
     xml = ('<?xml version="1.0" encoding="UTF-8"?>'
            f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{items}</urlset>')
     return Response(xml, mimetype="application/xml")
-
-
-@app.post("/api/inquiry")
-def api_inquiry():
-    data = request.get_json(silent=True) or request.form
-    # honeypot: 봇이 채우는 숨김 필드 — 채워져 있으면 저장 없이 정상 응답
-    if (data.get("website") or "").strip():
-        return jsonify({"ok": True})
-    if rate_limited("inquiry", limit=5):
-        return jsonify({"ok": False, "error": "요청이 너무 많습니다. 잠시 후 다시 시도해주세요."}), 429
-    name = (data.get("name") or "").strip()[:40]
-    phone = (data.get("phone") or "").strip()[:20]
-    if not name or not phone:
-        return jsonify({"ok": False, "error": "이름과 연락처를 입력해주세요."}), 400
-    # 신청 금액 → amount_final로 바로 저장. 입금완료 처리 시 이 금액이 그대로 랜딩 피드에 노출됨
-    digits = re.sub(r"\D", "", (data.get("amount") or ""))[:9]
-    amount_final = int(digits) if digits else None
-    memo = (data.get("memo") or "").strip()[:2000] or None
-    db.execute(
-        "INSERT INTO inquiries (source, name, phone, memo, amount_final) "
-        "VALUES ('form', %s, %s, %s, %s)",
-        (name, phone, memo, amount_final),
-    )
-    notify_new_inquiry({"source_label": "하단폼", "name": name, "phone": phone,
-                        "amount_final": amount_final, "memo": memo})
-    return jsonify({"ok": True}), 201
 
 
 @app.get("/api/live-feed")
