@@ -10,7 +10,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-WTBNDQFV');</script>
 <!-- End Google Tag Manager -->
-<title>알뜰티켓 — 카톡 한번으로 끝! 내 비상금 한도 바로찾기</title>
+<title>맥스페이 — 카톡 한번으로 끝! 내 비상금 한도 바로찾기</title>
 
 {# ── SEO ─────────────────────────────────────────── #}
 <meta name="description" content="{{ SITE_DESCRIPTION }}">
@@ -19,8 +19,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="google-site-verification" content="VCDVd409ev4Ju8pOvhZLU6IvHTI70eAsR59lLyyktJ8" />
 {# 카톡/문자/SNS 공유 미리보기 (Open Graph) #}
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="알뜰티켓">
-<meta property="og:title" content="알뜰티켓 — 카톡 한번으로 끝! 내 비상금 한도 바로찾기">
+<meta property="og:site_name" content="맥스페이">
+<meta property="og:title" content="맥스페이 — 카톡 한번으로 끝! 내 비상금 한도 바로찾기">
 <meta property="og:description" content="{{ SITE_DESCRIPTION }}">
 <meta property="og:url" content="{{ SITE_URL }}/">
 <meta property="og:image" content="{{ SITE_URL }}/static/img/og.png">
@@ -28,7 +28,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32.png') }}">
 <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
 {# FAQ 리치 결과용 구조화 데이터 — 아래 FAQ 섹션 내용과 반드시 동기화할 것 #}
@@ -41,7 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 ]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"알뜰티켓","url":"{{ SITE_URL }}/","logo":"{{ SITE_URL }}/static/img/apple-touch-icon.png"}
+{"@context":"https://schema.org","@type":"Organization","name":"맥스페이","url":"{{ SITE_URL }}/","logo":"{{ SITE_URL }}/static/img/apple-touch-icon.png"}
 </script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -55,9 +54,9 @@ ChannelIO('boot',{pluginKey:'{{ CHANNELTALK_PLUGIN_KEY }}',hideChannelButtonOnBo
 {% endif %}
 <style>
 :root{
-  --yellow:#FFC933; --deep:#F2A900; --pale:#FFF6DC;
-  --ink:#191919; --gray:#767676; --gray-l:#F7F7F9; --line:#EDEDED;
-  --green:#12B76A; --navy:#1F2437;
+  --main:#2F7BFF; --deep:#1A5CE6; --pale:#EAF2FF;
+  --ink:#191919; --gray:#767676; --gray-l:#F5F8FD; --line:#E6ECF5;
+  --green:#12B76A; --navy:#0A2463;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -73,7 +72,7 @@ section{padding:90px 0;text-align:center}
 .sec-desc b{color:var(--ink);font-weight:700}
 .pill{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;font-size:15px;font-weight:800;padding:14px 30px;border-radius:999px;margin-top:28px;transition:transform .15s,box-shadow .15s}
 .pill:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.18)}
-.pill.y{background:var(--yellow);color:var(--ink)}
+.pill.y{background:var(--main);color:#fff}
 .pill svg,.btn-big svg{width:19px;height:19px}
 :focus-visible{outline:3px solid var(--deep);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -101,16 +100,6 @@ section{padding:90px 0;text-align:center}
 .g-pink{background:linear-gradient(135deg,#FF6D96,#E0356B)}
 .g-dark{background:linear-gradient(135deg,#3A4157,#171B28)}
 
-/* 히어로 카드 스택 */
-.hero{position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;left:50%;top:52%;width:560px;height:560px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,201,51,.35),transparent 65%);pointer-events:none}
-.stack{position:relative;width:min(340px,80vw);height:230px;margin:48px auto 0;animation:rise .8s ease .35s both}
-.stack .gc{position:absolute;width:230px;height:145px;left:50%;top:34px}
-.stack .gc:nth-child(1){transform:translateX(-50%) rotate(-12deg) translateX(-66px);animation:floaty 4.5s ease-in-out 1.2s infinite alternate}
-.stack .gc:nth-child(2){transform:translateX(-50%) rotate(9deg) translateX(66px);animation:floaty 5.5s ease-in-out 1.6s infinite alternate}
-.stack .gc:nth-child(3){transform:translateX(-50%) translateY(-14px);z-index:2;animation:floaty 5s ease-in-out 1.4s infinite alternate;box-shadow:0 24px 50px rgba(0,0,0,.28)}
-/* AI 모델 이미지 사용 시: .stack 대신 <img class="hero-model" src="..."> */
-.hero-model{display:block;width:min(420px,86vw);margin:40px auto -70px;position:relative;z-index:1;animation:rise .8s ease .3s both;filter:drop-shadow(0 24px 40px rgba(0,0,0,.18))}
 
 
 /* header */
@@ -118,31 +107,44 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdro
 header.scrolled{box-shadow:0 4px 18px rgba(0,0,0,.06)}
 .nav{max-width:1040px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
 .logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:900;letter-spacing:-0.02em}
-.logo .tk{width:28px;height:20px;background:var(--yellow);border-radius:5px;position:relative;display:inline-block}
-.logo .tk::before,.logo .tk::after{content:"";position:absolute;width:7px;height:7px;background:#fff;border-radius:50%;top:6.5px}
-.logo .tk::before{left:-3.5px}.logo .tk::after{right:-3.5px}
+.logo img{width:32px;height:32px}
+.logo b{color:var(--navy)}.logo b span{color:var(--main)}
+.logo small{font-size:13px;font-weight:700;color:var(--gray)}
 .nav ul{display:flex;gap:26px;list-style:none;font-size:14px;font-weight:600;color:#555}
 .nav ul a:hover{color:var(--ink)}
 @media(max-width:800px){.nav ul{display:none}}
 
-/* hero */
-.hero{padding:84px 20px 70px;text-align:center;background:linear-gradient(180deg,var(--pale) 0%,#fff 90%)}
-.hero h1{font-size:clamp(28px,5.6vw,44px);font-weight:900;letter-spacing:-0.04em;line-height:1.35;animation:rise .7s ease .05s both}
-.hero h1 .c{color:var(--deep)}
-.hero .note{margin-top:18px;font-size:13px;color:#999;animation:rise .7s ease .2s both}
-.hero .note b{color:#666}
+/* hero — MAX PAY 로고 + 파란 물결 */
+.hero{position:relative;overflow:hidden;padding:36px 20px 120px;text-align:center;background:linear-gradient(180deg,#fff 0%,#F3F8FF 55%,var(--pale) 100%)}
+.hero::before{content:"";position:absolute;left:50%;top:30%;width:640px;height:640px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(47,123,255,.14),transparent 65%);pointer-events:none}
+.hero-logo{display:block;position:relative;width:min(560px,92vw);height:auto;margin:0 auto;animation:rise .8s ease both;
+  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 72%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 72%,transparent 100%)}
+.hero h1{position:relative;margin-top:10px;font-size:clamp(26px,5.2vw,40px);font-weight:900;letter-spacing:-0.04em;line-height:1.35;color:var(--navy);animation:rise .7s ease .15s both}
+.hero h1 .c{color:var(--main)}
+.hero .sub{position:relative;display:inline-block;margin-top:14px;background:var(--navy);color:#fff;font-size:clamp(13px,2.6vw,15px);font-weight:800;padding:7px 18px;border-radius:999px;animation:rise .7s ease .2s both}
+.hero .lead{position:relative;margin-top:16px;font-size:15px;color:#4A5568;animation:rise .7s ease .25s both}
+.hero .lead b{color:var(--deep)}
+.hero .ch-btn{margin-top:26px;animation:rise .7s ease .3s both}
+.hero .note{position:relative;margin-top:16px;font-size:12.5px;color:#8A94A6;animation:rise .7s ease .35s both}
+.hero .note b{color:#5A6478}
+.hero .wave{position:absolute;left:0;bottom:-1px;width:100%;height:110px;pointer-events:none}
+/* 채널톡 상담 버튼 (히어로·팝업 공용) */
+.ch-btn{display:inline-flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--main),var(--deep));color:#fff;font-size:16px;font-weight:800;padding:16px 30px;border-radius:999px;box-shadow:0 12px 28px rgba(26,92,230,.35);transition:transform .15s;position:relative;white-space:nowrap}
+.ch-btn:hover{transform:translateY(-2px)}
+.ch-btn svg{width:22px;height:22px;flex:none}
+.ch-btn i{font-style:normal;font-weight:900;padding-left:14px;border-left:1px solid rgba(255,255,255,.4)}
 
 /* stat callout */
 .stat{padding:80px 20px}
 .stat h2{font-size:clamp(24px,4.6vw,34px);font-weight:900;letter-spacing:-0.03em;line-height:1.45}
 .stat h2 .c{color:var(--deep)}
-.stat h2 .cash{display:inline-flex;vertical-align:-4px;width:34px;height:26px;background:var(--yellow);border-radius:6px;position:relative;margin:0 4px}
+.stat h2 .cash{display:inline-flex;vertical-align:-4px;width:34px;height:26px;background:var(--main);border-radius:6px;position:relative;margin:0 4px}
 .stat h2 .cash::after{content:"";position:absolute;inset:5px 8px;border:2px solid #fff;border-radius:50%}
 .stat .em{margin-top:26px;font-size:15px}
 .stat .em b{font-weight:800}
 .stat .em p{color:var(--gray);margin-top:4px}
 .stat .chev{margin:26px auto 0;width:26px;color:#C9C9C9;animation:bounceDown 1.6s ease-in-out infinite}
-.btn-big{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:30px;background:var(--yellow);color:var(--ink);font-size:17px;font-weight:900;padding:19px 0;width:min(420px,88vw);border-radius:14px;box-shadow:0 10px 26px rgba(242,169,0,.35);transition:transform .15s}
+.btn-big{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:30px;background:var(--main);color:#fff;font-size:17px;font-weight:900;padding:19px 0;width:min(420px,88vw);border-radius:14px;box-shadow:0 10px 26px rgba(26,92,230,.35);transition:transform .15s}
 .btn-big:hover{transform:translateY(-2px)}
 
 /* phone mockup */
@@ -173,7 +175,7 @@ header.scrolled{box-shadow:0 4px 18px rgba(0,0,0,.06)}
 .scr .txt{margin-top:14px;font-size:13.5px;color:var(--gray);line-height:1.6;padding:0 22px}
 .scr .txt b{color:var(--ink)}
 .p-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 20px 0;padding:14px;border-radius:999px;font-size:14px;font-weight:800}
-.p-btn.k{background:var(--yellow)}
+.p-btn.k{background:var(--main);color:#fff}
 .p-btn.o{background:#fff;border:1.5px solid var(--line);margin-top:10px}
 .p-btn svg{width:17px;height:17px}
 .scr .tiny{margin-top:14px;font-size:10.5px;color:#B5B5B5}
@@ -223,7 +225,7 @@ tr.new-row td{animation:rowFlash 2s ease}
 .rv-nav svg{width:18px;height:18px}
 .dots{display:flex;gap:8px;justify-content:center;margin-top:20px}
 .dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3)}
-.dots i.on{background:var(--yellow)}
+.dots i.on{background:var(--main)}
 @media(max-width:780px){.rv-nav{background:rgba(0,0,0,.25)}}
 
 /* trust */
@@ -261,9 +263,57 @@ footer a{text-decoration:underline}
 .fab.ch{background:var(--navy);color:#fff}
 .fab.kko{background:#FEE500;color:#191919}
 .fab.tel{background:var(--navy);color:#fff}
-.fab.top{background:var(--yellow);color:var(--ink)}
+.fab.top{background:var(--main);color:#fff}
 .fab .tip{position:absolute;right:64px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
 .fab:hover .tip{opacity:1}
+
+/* 채널톡 안내 팝업 */
+.pop{position:fixed;inset:0;z-index:100;background:rgba(10,36,99,.55);display:flex;align-items:center;justify-content:center;padding:16px;animation:popFade .25s ease}
+.pop[hidden]{display:none}
+@keyframes popFade{from{opacity:0}}
+.pop-box{position:relative;width:min(580px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:clamp(14px,4vw,28px);border-radius:6px;
+  background:linear-gradient(rgba(255,255,255,.45) 1px,transparent 1px) 0 0/22px 22px,linear-gradient(90deg,rgba(255,255,255,.45) 1px,transparent 1px) 0 0/22px 22px,#CFE0FF;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.pop-x{position:absolute;right:8px;top:8px;z-index:2;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center}
+.pop-x svg{width:20px;height:20px}
+.pop-in{cursor:pointer;--px:clamp(12px,4vw,26px);background:#FBFCFF;box-shadow:5px 5px 0 #6E8FC9;padding:0 var(--px);text-align:center}
+.checker{height:16px;margin:0 calc(-1*var(--px));background:repeating-conic-gradient(var(--deep) 0 25%,#fff 0 50%) 0 0/16px 16px}
+.pop-in h2{margin:22px 0 4px;font-size:clamp(25px,7vw,38px);font-weight:900;letter-spacing:-0.05em;line-height:1.35;color:var(--ink)}
+.pop-in h2 .b{color:var(--main)}
+.pop-in h2 .hl{background:var(--main);color:#fff;padding:0 6px}
+.pop-sec{position:relative;margin:30px 0 0;border:2px solid #3A4157;border-radius:16px;padding:30px clamp(10px,3vw,18px) 16px}
+.pop-sec+.checker{margin-top:22px}
+.pop-tag{position:absolute;left:50%;top:-17px;transform:translateX(-50%);background:var(--main);color:#fff;border:2px solid #3A4157;border-radius:999px;font-size:17px;font-weight:900;padding:2px 34px;white-space:nowrap}
+.pop .dash{outline:2.5px dashed #E5484D;outline-offset:3px}
+.pc-mock{background:linear-gradient(135deg,#EAF2FF,#C9DCFF);border-radius:10px;padding:16px 12px;font-size:12.5px;color:#4A5568;line-height:1.6}
+.pc-mock b{color:var(--main)}
+.pop .ch-btn.sm{font-size:12.5px;padding:9px 16px;gap:9px;box-shadow:none}
+.pop .ch-btn.sm svg{width:16px;height:16px}
+.pop .ch-btn.sm i{padding-left:9px}
+.pc-mock .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.tel-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);border:1.5px solid #B9CDF2;border-radius:999px;font-size:12.5px;font-weight:800;padding:8px 14px;white-space:nowrap}
+.tel-btn svg{width:15px;height:15px;color:var(--main)}
+.tel-btn small{font-size:inherit;font-weight:600;color:#6A7488}
+.pop-sec>.ch-btn{margin-top:14px;font-size:14px;padding:12px 22px}
+.pop-desc{margin-top:10px;font-size:clamp(14px,3.8vw,17px);font-weight:800;color:var(--ink)}
+.pop-desc b,.mo-txt b{color:var(--main)}
+.mo-row{display:flex;gap:12px;align-items:center;text-align:left}
+.mo-mock{flex:0 0 42%;background:linear-gradient(160deg,#EAF2FF,#C9DCFF);border-radius:10px;padding:12px 8px 10px;text-align:center}
+.mo-mock strong{display:block;font-size:12px;font-weight:900;color:var(--navy)}
+.mo-mock small{display:block;font-size:9px;color:#6A7488;line-height:1.4;margin-top:3px}
+.mo-mock .ch-btn{margin-top:8px;font-size:9.5px;padding:6px 9px;gap:6px;box-shadow:none}
+.mo-mock .ch-btn svg{width:12px;height:12px}.mo-mock .ch-btn i{padding-left:6px}
+.mo-mock .tel-btn{margin-top:8px;font-size:9px;padding:5px 8px;gap:5px}
+.mo-mock .tel-btn svg{width:11px;height:11px}
+.mo-mock .ch-btn{margin-top:7px}
+.mo-bar{display:flex;margin:10px -8px -10px;border-radius:0 0 10px 10px;overflow:hidden;font-size:8.5px;font-weight:800;color:#fff}
+.mo-bar span{flex:1;padding:6px 2px;background:var(--main);display:flex;flex-direction:column;align-items:center;gap:2px}
+.mo-bar span+span{background:var(--deep)}
+.mo-bar svg{width:12px;height:12px}
+.mo-bar .dash{outline-offset:-3px}
+.mo-txt{flex:1;font-size:clamp(13px,3.6vw,16px);font-weight:800;line-height:1.75;color:var(--ink)}
+.mo-txt .ch-btn{margin:4px 0;font-size:11.5px;padding:8px 13px}
+.pop-in{word-break:keep-all}
+@media(max-width:480px){.pop-sec>.ch-btn{font-size:13px;padding:11px 16px;gap:10px}.pop-sec>.ch-btn i{padding-left:10px}.mo-row{flex-direction:column}.mo-mock{flex:none;width:min(240px,100%)}.mo-txt{text-align:center}}
 </style>
 </head>
 <body>
@@ -367,7 +417,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header>
   <div class="nav">
-    <a href="#" class="logo"><span class="tk"></span>알뜰티켓</a>
+    <a href="#" class="logo"><img src="{{ url_for('static', filename='img/logo-m.png') }}" alt=""><b>MAX <span>PAY</span></b><small>맥스페이</small></a>
     <ul>
       <li><a href="#intro">서비스 소개</a></li>
       <li><a href="#live">진행현황</a></li>
@@ -379,11 +429,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <div class="hero">
-  <h1>카톡 한번으로 끝!<br>내 <span class="c">비상금 한도 바로찾기</span><br><span class="c">소액결제 / 신용카드 / 정보이용료</span></h1>
+  <img class="hero-logo" src="{{ url_for('static', filename='img/hero-maxpay.jpg') }}" width="1280" height="853" alt="MAX PAY 맥스페이 — 모바일상품권 매입 전문">
+  <h1>카톡 한번으로 끝!<br>내 <span class="c">비상금 한도 바로찾기</span></h1>
+  <div class="sub">소액결제 / 신용카드 / 정보이용료</div>
+  <p class="lead">갑작스러운 자금 필요할 땐 맥스페이에서<br><b>24시간 언제나 평균 7분 안에</b> 처리 가능합니다</p>
+  <button class="ch-btn" onclick="openChannel()"><svg aria-hidden="true"><use href="#i-smile"/></svg>채널톡 상담<i>클릭 시 바로연결</i></button>
   <p class="note">* 지금 <b>30초 만에 한도 조회</b> 가장 간편한 비상금 서비스.<br>가입이나 앱 설치 없이 이용 가능합니다.</p>
-  {# AI 모델 이미지 적용 (CLAUDE.md 8절) — 카드 스택으로 되돌리려면 원본 디자인본(루트 index.html)의 .stack 블록 참조 #}
-  <img class="hero-model" src="{{ url_for('static', filename='img/hero-model.png') }}" alt="알뜰티켓 상담사가 시세 조회 화면을 보여주는 모습">
-
+  <svg class="wave" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 70C240 20 480 10 760 48s560 50 680 0V110H0z" fill="#9CC2FF" opacity=".35"/>
+    <path d="M0 88C300 40 620 60 900 80s420 10 540-30V110H0z" fill="#2F7BFF" opacity=".55"/>
+    <path d="M0 100C360 70 720 92 1040 96s300-14 400-30V110H0z" fill="#fff"/>
+  </svg>
 </div>
 
 <section class="stat">
@@ -401,9 +457,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section id="intro" style="padding-top:40px">
   <div class="wrap">
-    <div class="sec-brand">알뜰티켓</div>
+    <div class="sec-brand">맥스페이</div>
     <h2 class="sec-title">간편 비상금 서비스</h2>
-    <p class="sec-desc">알뜰티켓은 복잡한 절차 없이,<br><b>카톡 한 통</b>비상금을 마련할수 있는<br>신개념 간편 비상금 서비스입니다.</p>
+    <p class="sec-desc">맥스페이은 복잡한 절차 없이,<br><b>카톡 한 통</b>비상금을 마련할수 있는<br>신개념 간편 비상금 서비스입니다.</p>
     <a class="pill" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener">바로 신청하기</a>
   </div>
 </section>
@@ -415,11 +471,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="phone-wrap rv">
       <div class="toast pay" aria-hidden="true">
         <div class="t-ic"><svg><use href="#i-coin"/></svg></div>
-        <div style="flex:1"><div class="t-tt">입금 완료<small>방금 전</small></div><div class="t-tx">알뜰티켓 <b>{{ "{:,}".format(CULTURE_100K_PRICE) }}원</b> 입금</div></div>
+        <div style="flex:1"><div class="t-tt">입금 완료<small>방금 전</small></div><div class="t-tx">맥스페이 <b>{{ "{:,}".format(CULTURE_100K_PRICE) }}원</b> 입금</div></div>
       </div>
       <div class="toast talk" aria-hidden="true">
         <div class="t-ic"><svg><use href="#i-chat-f"/></svg></div>
-        <div style="flex:1"><div class="t-tt">알뜰티켓<small>오후 12:39</small></div><div class="t-tx">시세 확인 완료! 바로 매입 도와드릴게요</div></div>
+        <div style="flex:1"><div class="t-tt">맥스페이<small>오후 12:39</small></div><div class="t-tx">시세 확인 완료! 바로 매입 도와드릴게요</div></div>
       </div>
       <div class="iphone">
       <div class="scr">
@@ -431,7 +487,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <svg class="icon" aria-hidden="true"><use href="#i-coin"/></svg>
         <div><span class="badge-line">시세 조회 완료</span></div>
         <div class="big">최대 <span class="c">{{ "{:,}".format(CULTURE_100K_PRICE) }}원</span></div>
-        <div><span class="badge-y">알뜰티켓 초고속 비상금서비스</span></div>
+        <div><span class="badge-y">맥스페이 초고속 비상금서비스</span></div>
         <p class="txt">지금 바로 카카오톡으로 상담하시면<br><b>7분 이내 입금</b>까지 도와드려요</p>
         <button class="p-btn k" onclick="openChannel()"><svg aria-hidden="true"><use href="#i-chat-f"/></svg>카카오톡으로 판매하기</button>
         <a class="p-btn o" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-phone"/></svg>전화로 문의하기</a>
@@ -445,8 +501,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 {# 매입 시세 섹션 제거됨 — 되살리려면 원본 디자인본(루트 index.html)의 .rates 섹션 참조 #}
 <section id="live" style="padding-top:40px">
   <div class="wrap">
-    <h2 class="sec-title"><span class="c">알뜰티켓</span> 실시간 진행현황</h2>
-    <p class="sec-desc">알뜰티켓을 이용한 분들의<br>실시간 진행현황을 확인해보세요!</p>
+    <h2 class="sec-title"><span class="c">맥스페이</span> 실시간 진행현황</h2>
+    <p class="sec-desc">맥스페이을 이용한 분들의<br>실시간 진행현황을 확인해보세요!</p>
     <div class="live-card">
       <div class="bar"><svg aria-hidden="true"><use href="#i-refresh"/></svg><span id="liveTime">00:00</span> 기준 이용자</div>
       <table>
@@ -460,7 +516,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="reviews">
   <div class="wrap">
-    <h2 class="sec-title">알뜰티켓 이용 후기</h2>
+    <h2 class="sec-title">맥스페이 이용 후기</h2>
   </div>
   <div class="rv2">
     <div class="rv2-vp"><div class="rv2-track" id="rvTrack"></div></div>
@@ -472,7 +528,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="trust">
   <div class="wrap">
-    <h2 class="sec-title">알뜰티켓, 믿고 써도 될까요?<br><b>그래서 준비했습니다</b></h2>
+    <h2 class="sec-title">맥스페이, 믿고 써도 될까요?<br><b>그래서 준비했습니다</b></h2>
     <p class="sec-desc">고객님들이 <b>믿고 이용하는 이유</b>, 따로 있어요!</p>
     {# TODO(대표 확인): 실제 서류 스캔본(사업자등록증/통신판매업신고증, 민감정보 마스킹) 확보 시
        아래 CSS 서류 썸네일 <div class="doc">...</div> 을 <img class="doc" src="..." alt="..."> 로 교체 — CLAUDE.md 8절 #}
@@ -500,10 +556,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <footer>
   <div class="wrap">
-    <div class="f-logo">알뜰티켓</div>
-    <p>상호명 : 알뜰티켓 | 운영시간 : 00:00~24:00 | 고객센터 : 24시간 운영</p>
+    <div class="f-logo">맥스페이</div>
+    <p>상호명 : 맥스페이 | 운영시간 : 00:00~24:00 | 고객센터 : 24시간 운영</p>
     <p style="margin-top:10px"><a href="{{ url_for('privacy') }}">개인정보처리방침</a></p>
-    <p style="margin-top:10px">© 2026 알뜰티켓. All rights reserved.</p>
+    <p style="margin-top:10px">© 2026 맥스페이. All rights reserved.</p>
   </div>
 </footer>
 
@@ -517,6 +573,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <button class="fab top" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 </div>
 
+{# 채널톡 실시간 상담 안내 팝업 — 페이지 진입 시 표시 #}
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="popTitle" hidden>
+  <div class="pop-box">
+    <button class="pop-x" onclick="closePop()" aria-label="팝업 닫기"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="pop-in" onclick="closePop();openChannel()">
+      <div class="checker"></div>
+      <h2 id="popTitle"><span class="b">채널톡</span>을 통해<br><span class="hl">실시간 상담이 가능</span>합니다!</h2>
+      <div class="pop-sec">
+        <div class="pop-tag">PC 화면</div>
+        <div class="pc-mock" aria-hidden="true">
+          갑작스러운 자금 필요할 땐 맥스페이에서<br><b>24시간 언제나 단 3분 안에</b> 처리 가능합니다
+          <div class="btns"><span class="tel-btn"><svg><use href="#i-phone"/></svg>전화 상담연결</span><span class="ch-btn sm dash"><svg><use href="#i-smile"/></svg>채널톡 상담<i>클릭 시 바로연결</i></span></div>
+        </div>
+        <button class="ch-btn"><svg aria-hidden="true"><use href="#i-smile"/></svg>채널톡 상담<i>클릭 시 바로연결</i></button>
+        <p class="pop-desc">PC화면에 보이는 <b>채널톡 상담하기</b>를 눌러주세요.</p>
+      </div>
+      <div class="pop-sec">
+        <div class="pop-tag">모바일 화면</div>
+        <div class="mo-row">
+          <div class="mo-mock" aria-hidden="true">
+            <strong>업계 최저 수준의 수수료!</strong>
+            <small>갑작스러운 자금 필요할 땐 맥스페이에서<br>24시간 언제나 단 3분 안에 처리 가능합니다</small>
+            <span class="tel-btn"><svg><use href="#i-phone"/></svg>전화 상담연결</span>
+            <span class="ch-btn dash"><svg><use href="#i-smile"/></svg>채널톡 상담<i>클릭 시 바로연결</i></span>
+            <div class="mo-bar"><span><svg><use href="#i-phone"/></svg>전화 상담하기</span><span class="dash"><svg><use href="#i-chat"/></svg>채널톡 상담하기</span></div>
+          </div>
+          <p class="mo-txt">핸드폰 화면에 보이는<br><button class="ch-btn sm"><svg aria-hidden="true"><use href="#i-smile"/></svg>채널톡 상담<i>클릭 시 바로연결</i></button><br>박스를 눌러주시면<br>더욱 <b>쉽고 빠른 상담을</b><br>받아보실 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="checker"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function openChannel(){
@@ -524,6 +614,12 @@ function openChannel(){
   /* 채널톡 임베드 미설정 시 채널톡 상담 페이지를 새 탭으로 — .env CHANNELTALK_PLUGIN_KEY 설정 시 사이트 내 메신저가 열림 */
   window.open('{{ CHANNEL_TALK_URL }}','_blank','noopener');
 }
+/* 채널톡 안내 팝업: X·바깥 클릭·ESC로 닫기 */
+const pop=document.getElementById('pop');
+function closePop(){pop.hidden=true;document.documentElement.style.overflow=''}
+pop.addEventListener('click',e=>{if(e.target===pop)closePop()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!pop.hidden)closePop()});
+pop.hidden=false;document.documentElement.style.overflow='hidden';pop.querySelector('.pop-x').focus({preventScroll:true});
 function pad(n){return String(n).padStart(2,'0')}
 
 /* 헤더 섀도 */

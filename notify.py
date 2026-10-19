@@ -28,7 +28,7 @@ def notify(text):
 def notify_new_inquiry(inq):
     amt = inq.get("amount_final")
     notify(
-        "[알뜰티켓] 새 문의 접수\n"
+        "[맥스페이] 새 문의 접수\n"
         f"유입: {inq.get('source_label', inq.get('source', ''))}\n"
         f"이름: {inq.get('name', '')}\n"
         f"연락처: {inq.get('phone', '')}\n"
@@ -38,7 +38,7 @@ def notify_new_inquiry(inq):
 
 
 def notify_status_change(name, phone, status_label, amount_final=None):
-    msg = f"[알뜰티켓] 상태 변경 → {status_label}\n이름: {name}\n연락처: {phone}"
+    msg = f"[맥스페이] 상태 변경 → {status_label}\n이름: {name}\n연락처: {phone}"
     if amount_final:
         msg += f"\n매입금액: {amount_final:,}원"
     notify(msg)

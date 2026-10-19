@@ -1,4 +1,4 @@
--- 알뜰티켓 DB 스키마 (MariaDB) — CLAUDE.md 4절
+-- 맥스페이 DB 스키마 (MariaDB) — CLAUDE.md 4절
 CREATE TABLE IF NOT EXISTS inquiries (
   id INT AUTO_INCREMENT PRIMARY KEY,
   source ENUM('form','channeltalk','phone','kakao') NOT NULL DEFAULT 'form',

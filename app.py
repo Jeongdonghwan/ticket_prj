@@ -1,4 +1,4 @@
-"""알뜰티켓 — 랜딩 + 상담 어드민 (Flask + MariaDB)"""
+"""맥스페이 — 랜딩 + 상담 어드민 (Flask + MariaDB)"""
 import os
 import time
 from collections import defaultdict, deque
