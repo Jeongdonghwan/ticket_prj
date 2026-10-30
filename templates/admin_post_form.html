@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{% include "_admin_head.html" %}
+<title>맥스페이 어드민 — {{ '글 수정' if post.id else '새 글' }}</title>
+<style>
+form.f{display:grid;gap:16px}
+label{display:block;font-weight:800;font-size:13px;margin-bottom:6px}
+label small{font-weight:600;color:var(--soft);margin-left:6px}
+input[type=text],input[type=datetime-local],textarea,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-family:inherit;font-size:14.5px;background:#fff}
+textarea{min-height:420px;line-height:1.7;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cover{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.cover img{width:120px;height:72px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+#preview{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;line-height:1.75}
+#preview h2{font-size:19px;margin:22px 0 8px}#preview h3{font-size:16px;margin:16px 0 6px}#preview p{margin:0 0 12px}
+#preview ul,#preview ol{padding-left:22px;margin:0 0 12px}#preview img{max-width:100%}
+.tools{display:flex;gap:8px;margin-bottom:6px}
+@media(max-width:760px){.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><i></i>맥스페이 어드민</div>
+  <nav><a href="{{ url_for('admin_list') }}">상담 리스트</a><a href="{{ url_for('admin_posts') }}" style="color:#fff">블로그</a><a href="{{ url_for('admin_logout') }}">로그아웃</a></nav>
+</header>
+<main>
+  <h1>{{ '글 수정' if post.id else '새 글 쓰기' }}</h1>
+  <p class="sub">본문은 마크다운: ## 제목, ### 소제목, - 목록, 1. 목록, **굵게**, [링크](https://...), ![설명](이미지주소)</p>
+  {% if error %}<div class="err">{{ error }}</div>{% endif %}
+  <form class="f" method="post">
+    <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+    <div><label for="title">제목</label><input type="text" id="title" name="title" value="{{ post.title or '' }}" maxlength="200" required></div>
+    <div><label for="slug">주소(slug)<small>비우면 제목으로 자동 생성 · /blog/주소/</small></label><input type="text" id="slug" name="slug" value="{{ post.slug or '' }}" maxlength="120"></div>
+    <div><label for="summary">요약<small>목록·검색 설명에 사용 (160자 내외)</small></label><input type="text" id="summary" name="summary" value="{{ post.summary or '' }}" maxlength="500"></div>
+    <div>
+      <label for="coverFile">대표 이미지<small>jpg·png·webp, 5MB 이하 → 긴 변 1600px webp 변환</small></label>
+      <div class="cover">
+        <img id="coverImg" src="{{ post.cover_image or '' }}" alt="대표 이미지 미리보기" {% if not post.cover_image %}hidden{% endif %}>
+        <input type="hidden" name="cover_image" id="coverVal" value="{{ post.cover_image or '' }}">
+        <input type="file" id="coverFile" accept=".jpg,.jpeg,.png,.webp">
+        <button type="button" class="btn" id="coverDel">이미지 빼기</button>
+      </div>
+    </div>
+    <div>
+      <label for="body">본문</label>
+      <div class="tools">
+        <button type="button" class="btn" id="imgBtn">본문 이미지 넣기</button>
+        <input type="file" id="imgFile" accept=".jpg,.jpeg,.png,.webp" hidden>
+        <button type="button" class="btn" id="pvBtn">미리보기</button>
+      </div>
+      <textarea id="body" name="body" required>{{ post.body or '' }}</textarea>
+    </div>
+    <div id="preview" hidden></div>
+    <div class="row2">
+      <div><label for="status">상태</label>
+        <select id="status" name="status">
+          <option value="draft"{% if post.status != 'published' %} selected{% endif %}>임시저장</option>
+          <option value="published"{% if post.status == 'published' %} selected{% endif %}>발행</option>
+        </select></div>
+      <div><label for="published_at">발행 시각<small>비우면 저장 시점 · 미래 시각이면 예약</small></label>
+        <input type="datetime-local" id="published_at" name="published_at" value="{{ post.published_at.strftime('%Y-%m-%dT%H:%M') if post.published_at else '' }}"></div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn pri">저장</button><a class="btn" href="{{ url_for('admin_posts') }}">목록</a></div>
+  </form>
+</main>
+<script>
+const CSRF = {{ csrf_token() | tojson }};
+const $ = (id) => document.getElementById(id);
+async function upload(file) {
+  const fd = new FormData();
+  fd.append('image', file);
+  const r = await fetch({{ url_for('admin_post_upload') | tojson }}, {method: 'POST', headers: {'X-CSRF-Token': CSRF}, body: fd});
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.url) throw new Error(j.error || '업로드에 실패했습니다.');
+  return j.url;
+}
+$('coverFile').onchange = async () => {
+  const f = $('coverFile').files[0];
+  if (!f) return;
+  try { const u = await upload(f); $('coverVal').value = u; $('coverImg').src = u; $('coverImg').hidden = false; }
+  catch (e) { alert(e.message); }
+  $('coverFile').value = '';
+};
+$('coverDel').onclick = () => { $('coverVal').value = ''; $('coverImg').hidden = true; };
+$('imgBtn').onclick = () => $('imgFile').click();
+$('imgFile').onchange = async () => {
+  const f = $('imgFile').files[0];
+  if (!f) return;
+  try {
+    const u = await upload(f), t = $('body'), p = t.selectionStart;
+    t.value = t.value.slice(0, p) + '\n![이미지 설명](' + u + ')\n' + t.value.slice(p);
+  } catch (e) { alert(e.message); }
+  $('imgFile').value = '';
+};
+$('pvBtn').onclick = async () => {
+  const r = await fetch({{ url_for('admin_post_preview') | tojson }}, {method: 'POST',
+    headers: {'X-CSRF-Token': CSRF, 'Content-Type': 'application/json'},
+    body: JSON.stringify({body: $('body').value, title: $('title').value})});
+  const j = await r.json().catch(() => ({}));
+  $('preview').innerHTML = j.html || '미리보기에 실패했습니다.';
+  $('preview').hidden = false;
+};
+</script>
+</body>
+</html>

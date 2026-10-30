@@ -49,7 +49,7 @@ select.st.hold{color:var(--red)}
 {% set st_class = {'new':'new','consulting':'ing','done':'done','hold':'hold'} %}
 <header>
   <div class="logo"><i></i>맥스페이 어드민</div>
-  <a href="{{ url_for('admin_logout') }}">로그아웃</a>
+  <nav style="display:flex;gap:18px"><a href="{{ url_for('admin_list') }}" style="color:#fff">상담 리스트</a><a href="{{ url_for('admin_posts') }}">블로그</a><a href="{{ url_for('admin_logout') }}">로그아웃</a></nav>
 </header>
 <main>
   <h1>상담 리스트</h1>

@@ -1,0 +1,20 @@
+{% extends "_seo_base.html" %}
+{% block content %}
+<article class="body">
+  <span class="eyebrow">BLOG</span>
+  <h1>{{ post.title }}</h1>
+  <p style="font-size:13.5px;color:var(--gray)"><time datetime="{{ post.published_at.isoformat() }}">{{ post.published_at.strftime('%Y년 %m월 %d일') }}</time></p>
+  {% if post.cover_image %}<img src="{{ post.cover_image }}" alt="{{ post.title }}">{% endif %}
+  {% if post.summary %}<p class="lead">{{ post.summary }}</p>{% endif %}
+  {{ body_html }}
+
+  {% if related %}
+  <h2>관련 대출 Q&amp;A</h2>
+  <ul class="rel">
+    {% for r in related %}<li><a href="{{ url_for('qa_page', slug=r.slug) }}">{{ r.kw }}</a></li>{% endfor %}
+  </ul>
+  {% endif %}
+  <p style="margin-top:14px"><a href="{{ url_for('blog_list') }}">블로그 목록으로</a></p>
+  {% include "_cta.html" %}
+</article>
+{% endblock %}

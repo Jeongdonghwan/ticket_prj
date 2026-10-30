@@ -1,0 +1,30 @@
+{% extends "_seo_base.html" %}
+{% block content %}
+<article class="body">
+  <span class="eyebrow">대출 Q&amp;A · {{ pg.topic }}{% if pg.aud %} · {{ pg.aud }}{% endif %}</span>
+  <h1>{{ pg.kw }}</h1>
+  <p class="lead">{{ pg.answer }}</p>
+  <p>{{ pg.intro2 }}</p>
+
+  {% for s in pg.sections %}
+  <h2>{{ s.h2 }}</h2>
+  {% for p in s.paras %}<p>{{ p }}</p>{% endfor %}
+  {% if s.bullets %}
+  <{{ 'ol' if s.ordered else 'ul' }}>{% for x in s.bullets %}<li>{{ x }}</li>{% endfor %}</{{ 'ol' if s.ordered else 'ul' }}>
+  {% endif %}
+  {% endfor %}
+
+  <h2>자주 묻는 질문</h2>
+  <div class="faq">
+    {% for q, a in pg.faqs %}<h3>{{ q }}</h3><p>{{ a }}</p>{% endfor %}
+  </div>
+
+  <h2>함께 보면 좋은 질문</h2>
+  <ul class="rel">
+    {% for r in pg.related %}<li><a href="{{ url_for('qa_page', slug=r.slug) }}">{{ r.kw }}</a></li>{% endfor %}
+  </ul>
+  <p style="margin-top:14px"><a href="{{ url_for('qa_hub') }}#{{ pg.topic }}">{{ pg.topic }} 질문 전체 보기</a></p>
+
+  {% include "_cta.html" %}
+</article>
+{% endblock %}

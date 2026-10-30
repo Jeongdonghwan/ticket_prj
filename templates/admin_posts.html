@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{% include "_admin_head.html" %}
+<title>맥스페이 어드민 — 블로그</title>
+</head>
+<body>
+<header>
+  <div class="logo"><i></i>맥스페이 어드민</div>
+  <nav><a href="{{ url_for('admin_list') }}">상담 리스트</a><a href="{{ url_for('admin_posts') }}" style="color:#fff">블로그</a><a href="{{ url_for('admin_logout') }}">로그아웃</a></nav>
+</header>
+<main>
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px">
+    <div><h1>블로그 글</h1><p class="sub">'발행' 상태이고 발행 시각이 지난 글만 공개됩니다 (미래 시각 = 예약 발행)</p></div>
+    <a class="btn pri" href="{{ url_for('admin_post_new') }}" style="margin-bottom:20px">새 글 쓰기</a>
+  </div>
+  <div class="panel">
+    <table>
+      <thead><tr><th>제목</th><th>상태</th><th class="hide-m">발행 시각</th><th class="hide-m">수정</th><th></th></tr></thead>
+      <tbody>
+        {% for p in posts %}
+        <tr>
+          <td><a href="{{ url_for('admin_post_edit', post_id=p.id) }}" style="color:inherit">{{ p.title }}</a><div style="font-size:12px;color:var(--soft);font-weight:500">/blog/{{ p.slug }}/</div></td>
+          <td>{% if p.status == 'published' %}<span class="src pub">{{ '발행' if p.live else '예약' }}</span>{% else %}<span class="src">임시저장</span>{% endif %}</td>
+          <td class="hide-m">{{ p.published_at.strftime('%Y-%m-%d %H:%M') if p.published_at else '-' }}</td>
+          <td class="hide-m">{{ p.updated_at.strftime('%m-%d %H:%M') if p.updated_at else '-' }}</td>
+          <td style="white-space:nowrap;text-align:right">
+            {% if p.live %}<a class="btn" href="{{ url_for('blog_post', slug=p.slug) }}" target="_blank" rel="noopener">보기</a>{% endif %}
+            <a class="btn" href="{{ url_for('admin_post_edit', post_id=p.id) }}">수정</a>
+            <form method="post" action="{{ url_for('admin_post_delete', post_id=p.id) }}" style="display:inline" onsubmit="return confirm('이 글을 삭제할까요? 되돌릴 수 없습니다.')">
+              <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+              <button class="btn del">삭제</button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5"><div class="empty">작성한 글이 없습니다.</div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{# 대부업 광고 표기 (대부업법 제9조) — 값은 config.py LENDER_* 상수. TODO(대표 확인): 실제 값 입력 후 오픈 #}
+<section class="disc" aria-labelledby="disc-title">
+  <h2 id="disc-title">대부업 등록 정보</h2>
+  <dl>
+    <dt>상호</dt><dd>{{ LENDER.name }}</dd>
+    <dt>대표자</dt><dd>{{ LENDER.ceo }}</dd>
+    <dt>대부업 등록번호</dt><dd>{{ LENDER.reg_no }}</dd>
+    <dt>등록기관</dt><dd>{{ LENDER.reg_authority }}</dd>
+    <dt>주소</dt><dd>{{ LENDER.address }}</dd>
+    <dt>대표전화</dt><dd>{{ LENDER.phone }}</dd>
+    <dt>대출 금리</dt><dd>{{ LENDER.rate }}</dd>
+    <dt>연체이자율</dt><dd>{{ LENDER.overdue_rate }}</dd>
+    <dt>이자 외 추가 비용</dt><dd>{{ LENDER.extra_cost }}</dd>
+  </dl>
+  <p class="warn">
+    중개수수료를 요구하거나 받는 것은 불법입니다.<br>
+    과도한 빚은 당신에게 큰 불행을 안겨줄 수 있습니다.<br>
+    대출 시 귀하의 신용등급 또는 개인신용평점이 하락할 수 있습니다.
+  </p>
+</section>

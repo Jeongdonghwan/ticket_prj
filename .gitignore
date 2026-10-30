@@ -10,3 +10,7 @@ venv/
 # 기타
 *.log
 .DS_Store
+
+# 블로그 업로드 이미지 (서버에만 존재)
+static/uploads/*
+!static/uploads/.gitkeep

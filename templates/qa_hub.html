@@ -1,0 +1,30 @@
+{% extends "_seo_base.html" %}
+{% block style %}
+.toc{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);margin:18px 0 10px}
+.toc a{flex:1 0 140px;padding:10px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;font-weight:700;font-size:14px}
+.toc a:hover{background:var(--pale);color:var(--deep)}
+.kw{display:flex;flex-wrap:wrap;gap:6px 14px;list-style:none;padding:0!important;font-size:15px}
+.kw li{margin:0!important}
+.kw a{text-decoration:none;color:#333;border-bottom:1px solid #C9D5EE}
+.kw a:hover{color:var(--deep);border-color:var(--deep)}
+{% endblock %}
+{% block content %}
+<div class="body">
+  <span class="eyebrow">대출 Q&amp;A</span>
+  <h1>대출 Q&amp;A — 조건·서류·심사·금리 질문 모음</h1>
+  <p class="lead">대출을 알아볼 때 자주 찾는 질문 {{ "{:,}".format(total) }}개를 상품과 대상자별로 묶었습니다. 각 질문 페이지는 결론을 먼저 적고, 조건·필요서류·심사·금리·주의할 점 순서로 정리했습니다.</p>
+  <p>금리와 한도는 심사 결과에 따라 사람마다 다르며, 등록된 금융회사라면 법정 최고금리 연 20%를 넘을 수 없습니다. 아래 목록에서 궁금한 상품을 고르세요.</p>
+  <nav class="toc" aria-label="주제 목록">
+    {% for g in groups %}<a href="#{{ g.topic }}">{{ g.topic }}</a>{% endfor %}
+  </nav>
+  {% for g in groups %}
+  <h2 id="{{ g.topic }}">{{ g.topic }}</h2>
+  <ul class="kw">{% for it in g.base %}<li><a href="{{ url_for('qa_page', slug=it.slug) }}">{{ it.kw }}</a></li>{% endfor %}</ul>
+  {% if g.aud %}
+  <h3>대상자별 {{ g.topic }}</h3>
+  <ul class="kw">{% for it in g.aud %}<li><a href="{{ url_for('qa_page', slug=it.slug) }}">{{ it.kw }}</a></li>{% endfor %}</ul>
+  {% endif %}
+  {% endfor %}
+  {% include "_cta.html" %}
+</div>
+{% endblock %}

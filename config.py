@@ -40,3 +40,19 @@ SITE_URL = "https://xn--b02b03nv4dg7o.com"
 
 # 검색 노출용 사이트 설명 (meta description / OG)
 SITE_DESCRIPTION = "카톡 한 번으로 끝나는 간편 매입 서비스, 맥스페이. 30초 시세 조회, 평균 7분 입금, 본인 명의 계좌 안전거래. 연중무휴 09:00~24:00 상담."
+
+# ── 대부업 표기 (대출 Q&A·블로그 페이지 하단 공시, templates/_loan_disclosure.html) ──
+# TODO(대표 확인): 대부업 등록증 기준 실제 값으로 전부 교체한 뒤 오픈할 것.
+# 대부업법 제9조(광고) 표기 항목 — 상호·대표자·등록번호·등록기관·주소·전화·이자율·연체이자율·추가비용.
+LENDER_NAME = "○○대부"                         # 상호 (등록증 표기 그대로)
+LENDER_CEO = "○○○"                             # 대표자
+LENDER_REG_NO = "0000-○○구-0000"               # 대부업 등록번호
+LENDER_REG_AUTHORITY = "○○구청"                # 등록기관 (시·군·구청 또는 금융위원회)
+LENDER_ADDRESS = "○○시 ○○구 ○○로 00"         # 영업소 주소
+LENDER_PHONE = "0000-0000"                     # 대표전화
+LENDER_RATE = "연 ○%~20% 이내"                 # 대출 금리 (법정 최고금리 연 20% 이내)
+LENDER_OVERDUE_RATE = "약정금리 + 연 ○%p 이내 (최고 연 20%)"   # 연체이자율
+LENDER_EXTRA_COST = "○○"                       # 이자 외 추가 비용 (없으면 "없음", 있으면 항목과 금액)
+
+# 블로그 목록 페이지당 글 수
+BLOG_PAGE_SIZE = 10
