@@ -3,6 +3,7 @@
   <p>금리와 한도는 심사 결과에 따라 개인별로 정해지며, 법정 최고금리 연 20%를 넘지 않습니다.</p>
   <div class="row">
     <a class="btn" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>채널톡 상담</a>
-    <a class="btn ghost" href="tel:{{ LENDER.phone }}"><svg aria-hidden="true"><use href="#i-phone"/></svg>전화 {{ LENDER.phone }}</a>
+    {% if KAKAO_CHANNEL_URL and KAKAO_CHANNEL_URL != "#" %}<a class="btn ghost" href="{{ KAKAO_CHANNEL_URL }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>카카오톡 문의</a>{% endif %}
+    {% if LENDER.phone and not LENDER.phone.startswith("0000") %}<a class="btn ghost" href="tel:{{ LENDER.phone }}"><svg aria-hidden="true"><use href="#i-phone"/></svg>전화 {{ LENDER.phone }}</a>{% endif %}
   </div>
 </aside>

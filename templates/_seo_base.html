@@ -94,6 +94,13 @@ h1{font-size:clamp(26px,5vw,36px);font-weight:900;letter-spacing:-0.035em;line-h
 .cta p{color:#C9D5EE;font-size:14.5px;margin:6px 0 18px}
 .cta .row{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
 .cta a.btn{color:#fff;text-decoration:none}
+/* 본문 중간 상담 줄 + 화면 고정 상담 버튼 */
+.cta-in{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:26px 0;padding:16px 18px;background:var(--pale);border-left:4px solid var(--main)}
+.cta-in p{margin:0;font-weight:700;font-size:15px}
+.cta-in .btn{padding:10px 16px;font-size:14px}
+.fab-ch{position:fixed;right:18px;bottom:18px;z-index:30;display:inline-flex;align-items:center;gap:8px;padding:14px 18px;background:var(--main);color:#fff;font-weight:800;font-size:15px;text-decoration:none;border-radius:4px;box-shadow:0 6px 18px rgba(10,36,99,.28)}
+.fab-ch:hover{background:var(--deep)}.fab-ch svg{width:20px;height:20px}
+@media(max-width:640px){.fab-ch{left:12px;right:12px;bottom:12px;justify-content:center}body{padding-bottom:72px}}
 /* footer + disclosure */
 footer{background:var(--gray-l);border-top:1px solid var(--line);padding:36px 0 60px;font-size:13px;color:#5A6478;margin-top:60px}
 .disc{background:#fff;border:1px solid var(--line);padding:18px 20px}
@@ -142,7 +149,7 @@ footer{background:var(--gray-l);border-top:1px solid var(--line);padding:36px 0 
 
 <footer>
   <div class="wrap">
-    {% include "_loan_disclosure.html" %}
+    {# TODO(오픈 전 필수): 푸터 디자인 후 대부업 등록 정보 include "_loan_disclosure.html" 다시 넣기 — 대부업법 제9조 #}
     <div class="flinks">
       <a href="{{ url_for('index') }}">맥스페이 홈</a>
       <a href="{{ url_for('qa_hub') }}">대출 Q&amp;A</a>
@@ -152,5 +159,6 @@ footer{background:var(--gray-l);border-top:1px solid var(--line);padding:36px 0 
     <p style="margin-top:12px">© 2026 맥스페이. All rights reserved.</p>
   </div>
 </footer>
+<a class="fab-ch" href="{{ CHANNEL_TALK_URL }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>채널톡 상담</a>
 </body>
 </html>
